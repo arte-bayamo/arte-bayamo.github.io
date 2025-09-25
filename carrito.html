@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido Cancelado - Arte Bayamo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tawk.to Script -->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/68d0a4b1f957d319246b25b4/1j5ng6lg2';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    
+    <style>
+        /* Mismo CSS que tu página principal */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --transition: all 0.2s ease;
+            --shadow: 0 3px 10px rgba(0,0,0,0.1);
+            --shadow-hover: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: white;
+            color: var(--dark);
+            line-height: 1.5;
+            padding-top: 70px;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Compacto */
+        header {
+            background-color: rgba(255, 255, 255, 0.98);
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: var(--transition);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        
+        .logo img {
+            height: 40px;
+            width: auto;
+            transition: var(--transition);
+        }
+        
+        .mini-gif {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.6rem;
+            text-align: center;
+            padding: 5px;
+            flex-shrink: 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .mini-gif img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('portadaprincipal.jpg') center/cover no-repeat;
+            color: white;
+            padding: 60px 0 40px;
+            position: relative;
+            margin-top: -70px;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+        
+        /* Contenido de cancelación */
+        .cancellation-content {
+            text-align: center;
+            padding: 60px 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cancellation-icon {
+            font-size: 4rem;
+            color: var(--accent);
+            margin-bottom: 25px;
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .cancellation-title {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .cancellation-message {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        .reasons-box {
+            background-color: #fff5f5;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            text-align: left;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .reasons-box h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .reasons-box ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .reasons-box li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .reasons-box li:before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+        
+        .help-section {
+            background-color: #f0f8ff;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .help-section h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            text-decoration: none;
+            text-align: center;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .btn-chat {
+            background-color: var(--success);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-chat:hover {
+            background-color: #219653;
+        }
+        
+        .btn-home {
+            background-color: var(--secondary);
+        }
+        
+        .btn-home:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-retry {
+            background-color: var(--accent);
+        }
+        
+        .btn-retry:hover {
+            background-color: #c0392b;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 50px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+            
+            .hero-banner {
+                padding: 40px 0 20px;
+                min-height: 250px;
+                margin-top: -60px;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .cancellation-content {
+                padding: 40px 0;
+            }
+            
+            .cancellation-title {
+                font-size: 1.8rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .reasons-box, .help-section {
+                padding: 20px 15px;
+            }
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1a1a1a;
+                color: #e0e0e0;
+            }
+            
+            header {
+                background-color: rgba(30, 30, 30, 0.98);
+            }
+            
+            .reasons-box {
+                background-color: #2a1a1a;
+                color: #e0e0e0;
+            }
+            
+            .help-section {
+                background-color: #1a2a2a;
+                color: #e0e0e0;
+            }
+            
+            .cancellation-message {
+                color: #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="mainHeader">
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <img src="logo-arte-bayamo-light.png" alt="Arte Bayamo" id="dynamicLogo">
+            </a>
+            
+            <div class="mini-gif">
+                <img src="mini-logo.png" alt="Arte Bayamo">
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="nav-link">Volver al Inicio</a></li>
+                    <li class="cart-icon" onclick="openTawkTo()" style="cursor: pointer;">
+                        <i class="fas fa-comments"></i> Ayuda
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+        <div class="container">
+            <h1 class="hero-title">Pedido Cancelado</h1>
+            <p class="hero-subtitle">Tu proceso de pago no se completó</p>
+        </div>
+    </div>
+
+    <!-- Contenido de cancelación -->
+    <div class="container">
+        <div class="cancellation-content">
+            <div class="cancellation-icon">
+                <i class="fas fa-times-circle"></i>
+            </div>
+            
+            <h2 class="cancellation-title">Proceso de pago interrumpido</h2>
+            
+            <p class="cancellation-message">
+                Lamentamos informarte que tu pedido en <strong>Arte Bayamo</strong> no pudo ser procesado. 
+                El proceso de pago fue cancelado o interrumpido antes de completarse.
+            </p>
+            
+            <div class="reasons-box">
+                <h3>¿Por qué pudo pasar esto?</h3>
+                <ul>
+                    <li>Cancelación voluntaria durante el proceso de pago</li>
+                    <li>Problemas temporales con el procesador de pagos</li>
+                    <li>Error en la información de la tarjeta o cuenta</li>
+                    <li>Fondos insuficientes en la cuenta</li>
+                    <li>Problemas de conexión a internet</li>
+                    <li>Tiempo de espera agotado</li>
+                </ul>
+            </div>
+            
+            <div class="help-section">
+                <h3>¿Necesitas ayuda?</h3>
+                <p>Estamos aquí para ayudarte. Si encontraste algún problema durante el proceso de pago o necesitas asistencia, no dudes en contactarnos.</p>
+                <p>También puedes intentar nuevamente cuando estés listo.</p>
+            </div>
+            
+            <p class="cancellation-message">
+                <strong>Importante:</strong> Tu carrito de compras se ha guardado temporalmente. 
+                Puedes volver a intentar el pago cuando lo desees.
+            </p>
+            
+            <div class="action-buttons">
+                <a href="index.html" class="btn btn-home">
+                    <i class="fas fa-home"></i> Volver al Inicio
+                </a>
+                
+                <button class="btn btn-retry" onclick="retryPayment()">
+                    <i class="fas fa-redo"></i> Reintentar Pago
+                </button>
+                
+                <button class="btn btn-chat" onclick="openTawkTo()">
+                    <i class="fas fa-comments"></i> Contactar por Chat
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2025 Arte Bayamo - Estamos aquí para ayudarte</p>
+        </div>
+    </footer>
+
+    <script>
+        // Función para abrir Tawk.to (igual que en tu página principal)
+        function openTawkTo() {
+            if (typeof Tawk_API !== 'undefined') {
+                Tawk_API.maximize();
+            }
+        }
+
+        // Función para reintentar el pago
+        function retryPayment() {
+            // Intentar recuperar el carrito desde localStorage
+            const savedCart = localStorage.getItem('arteBayamoCart');
+            
+            if (savedCart) {
+                // Redirigir al carrito o a la página de checkout
+                window.location.href = 'index.html#cartModal';
+            } else {
+                // Si no hay carrito guardado, redirigir a productos
+                window.location.href = 'index.html#products';
+            }
+        }
+
+        // Detectar tema del dispositivo y cambiar logo
+        function updateLogoForTheme() {
+            const logo = document.getElementById('dynamicLogo');
+            
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                if (logo) logo.src = 'logo-arte-bayamo-dark.png';
+            } else {
+                if (logo) logo.src = 'logo-arte-bayamo-light.png';
+            }
+        }
+
+        // Escuchar cambios de tema
+        if (window.matchMedia) {
+            const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            colorSchemeQuery.addEventListener('change', updateLogoForTheme);
+        }
+
+        // Mostrar detalles específicos de la cancelación si están en la URL
+        function showCancellationDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const reason = urlParams.get('reason');
+            const errorCode = urlParams.get('error_code');
+            
+            if (reason || errorCode) {
+                const detailsElement = document.getElementById('cancellationDetails');
+                if (detailsElement) {
+                    let detailsHTML = '<h4>Detalles de la cancelación:</h4><ul>';
+                    
+                    if (reason) {
+                        detailsHTML += `<li><strong>Razón:</strong> ${decodeURIComponent(reason)}</li>`;
+                    }
+                    
+                    if (errorCode) {
+                        detailsHTML += `<li><strong>Código de error:</strong> ${errorCode}</li>`;
+                    }
+                    
+                    detailsHTML += '</ul>';
+                    detailsElement.innerHTML = detailsHTML;
+                }
+            }
+        }
+
+        // Inicializar cuando se carga la página
+        document.addEventListener('DOMContentLoaded', function() {
+            updateLogoForTheme();
+            showCancellationDetails();
+            
+            // Guardar información de la cancelación para analytics
+            const cancelTime = new Date().toISOString();
+            localStorage.setItem('lastCancellation', cancelTime);
+        });
+
+        // Opcional: Enviar información de cancelación a tu sistema
+        function logCancellation() {
+            const cancellationData = {
+                timestamp: new Date().toISOString(),
+                page: window.location.href,
+                referrer: document.referrer,
+                userAgent: navigator.userAgent
+            };
+            
+            // Aquí puedes enviar esta información a tu backend o analytics
+            console.log('Cancellation logged:', cancellationData);
+        }
+
+        // Ejecutar cuando la página se carga
+        logCancellation();
+    </script>
+</body>
+</html>

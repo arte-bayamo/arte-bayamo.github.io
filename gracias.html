@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gracias por tu compra - Arte Bayamo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Tawk.to Script -->
+  <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+      s1.async=true;
+      s1.src='https://embed.tawk.to/68d0a4b1f957d319246b25b4/1j5ng6lg2';
+      s1.charset='UTF-8';
+      s1.setAttribute('crossorigin','*');
+      s0.parentNode.insertBefore(s1,s0);
+    })();
+  </script>
+  
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --accent: #e74c3c;
+      --light: #ecf0f1;
+      --dark: #2c3e50;
+      --success: #27ae60;
+      --warning: #f39c12;
+      --transition: all 0.2s ease;
+      --shadow: 0 3px 10px rgba(0,0,0,0.1);
+      --shadow-hover: 0 5px 15px rgba(0,0,0,0.15);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: white;
+      color: var(--dark);
+      line-height: 1.5;
+      padding-top: 70px;
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    /* Header Compacto */
+    header {
+      background-color: rgba(255, 255, 255, 0.98);
+      padding: 10px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      transition: var(--transition);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    
+    .logo img {
+      height: 40px;
+      width: auto;
+      transition: var(--transition);
+    }
+    
+    .mini-gif {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.6rem;
+      text-align: center;
+      padding: 5px;
+      flex-shrink: 0;
+      box-shadow: var(--shadow);
+    }
+    
+    .mini-gif img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    
+    /* Hero Banner */
+    .hero-banner {
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('portadaprincipal.jpg') center/cover no-repeat;
+      color: white;
+      padding: 60px 0 40px;
+      position: relative;
+      margin-top: -70px;
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .hero-title {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+    
+    .hero-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 25px;
+    }
+    
+    /* Contenido de agradecimiento */
+    .thankyou-content {
+      text-align: center;
+      padding: 60px 0;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .thankyou-icon {
+      font-size: 4rem;
+      color: var(--success);
+      margin-bottom: 25px;
+      animation: bounce 1s ease-in-out;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+      40% {transform: translateY(-10px);}
+      60% {transform: translateY(-5px);}
+    }
+    
+    .thankyou-title {
+      font-size: 2.2rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    
+    .thankyou-message {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      color: #555;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      border-left: 4px solid var(--success);
+    }
+    
+    .processing-message {
+      font-size: 1rem;
+      color: var(--warning);
+      margin: 20px 0;
+      padding: 15px;
+      background-color: #fffbf0;
+      border-radius: 8px;
+      border: 1px solid var(--warning);
+    }
+    
+    .next-steps {
+      background-color: #f0f8ff;
+      padding: 25px;
+      border-radius: 10px;
+      margin: 30px 0;
+      text-align: left;
+      border-left: 4px solid var(--secondary);
+    }
+    
+    .next-steps h3 {
+      color: var(--secondary);
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    
+    .next-steps ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    .next-steps li {
+      margin-bottom: 12px;
+      padding-left: 25px;
+      position: relative;
+    }
+    
+    .next-steps li:before {
+      content: "✓";
+      color: var(--success);
+      font-weight: bold;
+      font-size: 1.2rem;
+      position: absolute;
+      left: 0;
+    }
+    
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: var(--transition);
+      text-decoration: none;
+      text-align: center;
+      font-size: 1rem;
+    }
+    
+    .btn:hover {
+      background-color: var(--secondary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .btn-chat {
+      background-color: var(--success);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .btn-chat:hover {
+      background-color: #219653;
+    }
+    
+    .btn-home {
+      background-color: var(--secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .btn-home:hover {
+      background-color: #2980b9;
+    }
+    
+    .btn-products {
+      background-color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .btn-products:hover {
+      background-color: #34495e;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 25px 0;
+      margin-top: 50px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 60px;
+      }
+      
+      .hero-banner {
+        padding: 40px 0 20px;
+        min-height: 250px;
+        margin-top: -60px;
+      }
+      
+      .hero-title {
+        font-size: 2rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+      
+      .thankyou-content {
+        padding: 40px 0;
+      }
+      
+      .thankyou-title {
+        font-size: 1.8rem;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 300px;
+      }
+      
+      .next-steps {
+        padding: 20px 15px;
+      }
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+      }
+      
+      header {
+        background-color: rgba(30, 30, 30, 0.98);
+      }
+      
+      .thankyou-message {
+        background-color: #1a2a1a;
+        color: #e0e0e0;
+      }
+      
+      .processing-message {
+        background-color: #2a2a1a;
+        color: #e0e0e0;
+      }
+      
+      .next-steps {
+        background-color: #1a2a2a;
+        color: #e0e0e0;
+      }
+    }
+    
+    /* Animaciones de carga */
+    .loading-dots {
+      display: inline-block;
+      margin-left: 5px;
+    }
+    
+    .loading-dots:after {
+      content: '...';
+      animation: dots 1.5s steps(4, end) infinite;
+    }
+    
+    @keyframes dots {
+      0%, 20% { content: '.'; }
+      40% { content: '..'; }
+      60%, 100% { content: '...'; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="mainHeader">
+    <div class="container header-content">
+      <a href="index.html" class="logo">
+        <img src="logo-arte-bayamo-light.png" alt="Arte Bayamo" id="dynamicLogo">
+      </a>
+      
+      <div class="mini-gif">
+        <img src="mini-logo.png" alt="Arte Bayamo">
+      </div>
+      
+      <nav>
+        <ul>
+          <li><a href="index.html" class="nav-link">Volver al Inicio</a></li>
+          <li class="cart-icon" onclick="openTawkTo()" style="cursor: pointer;">
+            <i class="fas fa-comments"></i> Ayuda
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <div class="hero-banner">
+    <div class="container">
+      <h1 class="hero-title">¡Gracias por tu compra!</h1>
+      <p class="hero-subtitle">Estamos procesando tu pedido con mucho cuidado</p>
+    </div>
+  </div>
+
+  <!-- Contenido de agradecimiento -->
+  <div class="container">
+    <div class="thankyou-content">
+      <div class="thankyou-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      
+      <h2 class="thankyou-title">Tu pedido está siendo procesado</h2>
+      
+      <div class="thankyou-message" id="statusMessage">
+        <i class="fas fa-spinner fa-spin"></i> Estamos confirmando tu pago<span class="loading-dots"></span>
+      </div>
+      
+      <div class="processing-message">
+        <i class="fas fa-info-circle"></i> Este proceso puede tomar unos segundos. Por favor, no cierres esta página.
+      </div>
+      
+      <div class="next-steps">
+        <h3>¿Qué sigue ahora?</h3>
+        <ul>
+          <li>Recibirás una confirmación por correo electrónico de PayPal</li>
+          <li>Nos pondremos en contacto contigo para coordinar los detalles de entrega</li>
+          <li>Puedes contactarnos en cualquier momento para consultar el estado de tu pedido</li>
+          <li>Tu producto será preparado con mucho cuidado y amor</li>
+        </ul>
+      </div>
+      
+      <p class="thankyou-message">
+        <strong>¡Gracias por confiar en Arte Bayamo!</strong><br>
+        Tu apoyo significa mucho para nosotros y estamos comprometidos en hacerte llegar un producto de la más alta calidad.
+      </p>
+      
+      <div class="action-buttons">
+        <a href="index.html" class="btn btn-home">
+          <i class="fas fa-home"></i> Volver al Inicio
+        </a>
+        
+        <a href="index.html#products" class="btn btn-products">
+          <i class="fas fa-shopping-bag"></i> Seguir Comprando
+        </a>
+        
+        <button class="btn btn-chat" onclick="openTawkTo()">
+          <i class="fas fa-comments"></i> Contactar por Chat
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 Arte Bayamo - Gracias por tu compra</p>
+    </div>
+  </footer>
+
+  <script>
+    // Función para abrir Tawk.to
+    function openTawkTo() {
+      if (typeof Tawk_API !== 'undefined') {
+        Tawk_API.maximize();
+      }
+    }
+
+    // Función para actualizar logo según tema
+    function updateLogoForTheme() {
+      const logo = document.getElementById('dynamicLogo');
+      
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        if (logo) logo.src = 'logo-arte-bayamo-dark.png';
+      } else {
+        if (logo) logo.src = 'logo-arte-bayamo-light.png';
+      }
+    }
+
+    // Función principal para procesar el pago
+    async function processPayment() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const orderId = urlParams.get("token");
+      const statusMessage = document.getElementById('statusMessage');
+
+      if (!orderId) {
+        statusMessage.innerHTML = '<span style="color: var(--accent);"><i class="fas fa-exclamation-triangle"></i> No se recibió información de la orden. Si realizaste el pago, contacta con nosotros.</span>';
+        return;
+      }
+
+      try {
+        statusMessage.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Confirmando pago con PayPal<span class="loading-dots"></span>';
+        
+        // ✅ WORKFLOW 2 - CAPTURA DE PAGO
+        const res = await fetch("https://eol16cqgyqd6h2.m.pipedream.net", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ orderId })
+        });
+
+        const data = await res.json();
+        console.log("Resultado de captura:", data);
+
+        // ✅ VERIFICACIÓN CORREGIDA PARA PAYPAL
+        if (data.status === "COMPLETED" || 
+            (data.purchase_units && data.purchase_units[0].payments && 
+             data.purchase_units[0].payments.captures && 
+             data.purchase_units[0].payments.captures[0].status === "COMPLETED")) {
+          
+          statusMessage.innerHTML = '<span style="color: var(--success);"><i class="fas fa-check-circle"></i> ✅ Pago confirmado y capturado correctamente. ¡Gracias por confiar en Arte Bayamo!</span>';
+          
+          // Limpiar carrito
+          localStorage.removeItem('arteBayamoCart');
+          localStorage.removeItem('pendingOrder');
+          
+          // Mostrar mensaje de éxito adicional
+          setTimeout(() => {
+            const successAlert = document.createElement('div');
+            successAlert.style.cssText = `
+              background: linear-gradient(135deg, #27ae60, #2ecc71);
+              color: white;
+              padding: 15px;
+              border-radius: 10px;
+              margin: 20px 0;
+              text-align: center;
+              animation: fadeIn 0.5s ease;
+            `;
+            successAlert.innerHTML = `
+              <h4><i class="fas fa-gift"></i> ¡Tu pedido está confirmado!</h4>
+              <p>Te contactaremos dentro de las próximas 24 horas para coordinar la entrega.</p>
+            `;
+            statusMessage.parentNode.insertBefore(successAlert, statusMessage.nextSibling);
+          }, 1000);
+          
+        } else {
+          const errorStatus = data.status || (data.purchase_units && data.purchase_units[0].payments && data.purchase_units[0].payments.captures && data.purchase_units[0].payments.captures[0].status) || 'desconocido';
+          statusMessage.innerHTML = `<span style="color: var(--accent);"><i class="fas fa-exclamation-triangle"></i> El pago no se completó correctamente. Estado: ${errorStatus}</span>`;
+          console.error("Error en captura:", data);
+        }
+      } catch (err) {
+        console.error(err);
+        statusMessage.innerHTML = '<span style="color: var(--accent);"><i class="fas fa-exclamation-triangle"></i> ❌ Error al procesar el pago. Por favor, contacta con nosotros.</span>';
+      }
+    }
+
+    // Inicializar cuando se carga la página
+    document.addEventListener('DOMContentLoaded', function() {
+      updateLogoForTheme();
+      
+      // Escuchar cambios de tema
+      if (window.matchMedia) {
+        const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        colorSchemeQuery.addEventListener('change', updateLogoForTheme);
+      }
+      
+      // Procesar el pago con un pequeño delay para mejor UX
+      setTimeout(processPayment, 1000);
+    });
+
+    // Animación de fadeIn
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>

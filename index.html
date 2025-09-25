@@ -1,0 +1,2903 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arte Bayamo - Productos y Servicios Personalizados</title>
+    <meta name="version" content="2.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- ===== CONFIGURACIÓN EMAILJS PARA FORMULARIO DE CONTACTO ===== -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("pHF1WEdBXPOvMfz8M");
+        })();
+    </script>
+    
+   <!-- ===== CONFIGURACIÓN TAWK.TO PARA CHAT EN VIVO ===== -->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/68d0a4b1f957d319246b25b4/1j5ng6lg2';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+    
+    <style>
+        /* ===== VARIABLES GLOBALES Y CONFIGURACIÓN BASE ===== */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --transition: all 0.2s ease;
+            --shadow: 0 3px 10px rgba(0,0,0,0.1);
+            --shadow-hover: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* ===== CONFIGURACIÓN DEL CUERPO DE LA PÁGINA ===== */
+        body {
+            background-color: white;
+            color: var(--dark);
+            line-height: 1.5;
+            padding-top: 70px; /* Espacio para header fijo */
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* ===== HEADER PRINCIPAL - MENÚ DE NAVEGACIÓN ===== */
+        header {
+            background-color: rgba(255, 255, 255, 0.98);
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: var(--transition);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        /* ===== LOGO PRINCIPAL - CLICK PARA IR A PRODUCTOS ===== */
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        
+        .logo img {
+            height: 40px;
+            width: auto;
+            transition: var(--transition);
+        }
+        
+        /* ===== MINI GIF/LOGO CIRCULAR EN EL HEADER ===== */
+        .mini-gif {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.6rem;
+            text-align: center;
+            padding: 5px;
+            flex-shrink: 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .mini-gif img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        /* ===== MENÚ DE NAVEGACIÓN PRINCIPAL ===== */
+        nav {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        nav li {
+            margin: 0;
+        }
+        
+        nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 20px;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            white-space: nowrap;
+            position: relative;
+        }
+        
+        nav a:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: var(--transition);
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--secondary);
+        }
+        
+        nav a:hover:before, nav a.active:before {
+            width: 100%;
+        }
+        
+        /* ===== ICONO DEL CARRITO CON CONTADOR ===== */
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            background: var(--light);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+        
+        .cart-icon:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            box-shadow: var(--shadow);
+        }
+
+        /* ===== BOTÓN ATRÁS FLOTANTE PARA DETALLES ===== */
+        .back-button-fixed {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            z-index: 999;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 10px 15px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .back-button-fixed.show {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .back-button-fixed:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateX(-3px);
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-10px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        /* ===== HERO BANNER PRINCIPAL CON FONDO DE IMAGEN ===== */
+        .hero-banner {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('portadaprincipal.jpg') center/cover no-repeat;
+            color: white;
+            padding: 60px 0 40px;
+            position: relative;
+            margin-top: -70px;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .hero-text-content {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.8s ease;
+        }
+        
+        .hero-gif-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.8s ease 0.3s both;
+        }
+        
+        .main-gif {
+            max-width: 100%;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .main-gif img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .hero-title {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        /* ===== SECCIONES PRINCIPALES (PRODUCTOS, SERVICIOS, CONTACTO, TÉRMINOS) ===== */
+        .section {
+            padding: 50px 0;
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .detail-page {
+            display: none;
+            padding: 50px 0;
+        }
+        
+        .detail-page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* ===== TÍTULO DE SECCIÓN CON LÍNEA DECORATIVA ===== */
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 12px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        /* ===== BOTÓN ATRÁS EN PÁGINAS DE DETALLE ===== */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 25px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border: 2px solid var(--primary);
+            border-radius: 25px;
+            transition: var(--transition);
+        }
+        
+        .back-button:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateX(-3px);
+        }
+        
+        .back-button i {
+            margin-right: 6px;
+        }
+        
+        /* ===== GRID DE SERVICIOS Y PRODUCTOS (TARJETAS) ===== */
+        .services-grid, .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .service-card, .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            top: 0;
+        }
+        
+        .service-card:hover, .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        /* ===== CONTENEDOR DE IMAGEN EN TARJETAS (ALTURA FIJA 180px) ===== */
+        .card-image {
+            height: 180px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f5f5;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .service-card:hover .card-image img,
+        .product-card:hover .card-image img {
+            transform: scale(1.03);
+        }
+        
+        .card-content {
+            padding: 15px;
+        }
+        
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+        
+        .card-description {
+            margin-bottom: 15px;
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        /* ===== BOTONES GENERALES DE LA APLICACIÓN ===== */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            text-decoration: none;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .btn-view {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-view:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            color: #666;
+        }
+        
+        .btn-disabled:hover {
+            background-color: #ccc;
+            transform: none;
+            box-shadow: var(--shadow);
+        }
+        
+        .btn-chat {
+            background-color: var(--success);
+            margin-top: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-chat:hover {
+            background-color: #219653;
+        }
+
+        .btn-facebook {
+            background-color: #3b5998;
+            margin-top: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-facebook:hover {
+            background-color: #2d4373;
+        }
+        
+        /* ===== SELECTORES DE UBICACIÓN (PROVINCIA/MUNICIPIO) ===== */
+        .location-selector {
+            margin: 15px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .select-group {
+            flex: 1;
+            min-width: 180px;
+        }
+        
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        select:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        /* ===== INDICADOR DE DISPONIBILIDAD DE ENVÍO ===== */
+        .shipping-status {
+            margin: 12px 0;
+            font-weight: 500;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .available {
+            background-color: rgba(39, 174, 96, 0.1);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+        
+        .unavailable {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+        
+        .future-available {
+            color: var(--warning);
+        }
+        
+        /* ===== FORMULARIO DE CONTACTO ===== */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        input:focus, textarea:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        /* ===== GALERÍA DE IMÁGENES EN PÁGINAS DE DETALLE ===== */
+        .detail-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        /* ===== IMAGEN PRINCIPAL CON PROPORCIÓN 16:9 ===== */
+        .detail-main-image {
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            position: relative;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .detail-main-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* ===== IMÁGENES SECUNDARIAS EN GRID 2 COLUMNAS ===== */
+        .detail-secondary-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .detail-secondary-image {
+            height: 0;
+            padding-bottom: 75%; /* 4:3 aspect ratio */
+            position: relative;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .detail-secondary-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .detail-secondary-image:hover img {
+            transform: scale(1.03);
+        }
+        
+        .detail-info {
+            margin-bottom: 25px;
+        }
+        
+        .detail-price {
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin: 15px 0;
+            color: var(--secondary);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+        
+        /* ===== NUEVOS ESTILOS PARA SELECTOR DE MEDIDAS ===== */
+        .measurement-selector {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+        
+        .measurement-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: #e74c3c; /* Rojo por defecto */
+            transition: var(--transition);
+        }
+        
+        .measurement-title.valid {
+            color: #27ae60; /* Verde cuando es válido */
+        }
+        
+        .measurement-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .measurement-option {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: white;
+        }
+        
+        .measurement-option:hover {
+            border-color: var(--secondary);
+        }
+        
+        .measurement-option.selected {
+            border-color: var(--success);
+            background-color: rgba(39, 174, 96, 0.1);
+        }
+        
+        .measurement-option .size {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        
+        .measurement-option .price {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        /* ===== CALCULADORA DE BANNER ===== */
+        .banner-calculator {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+        
+        .calculator-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 10px;
+            align-items: end;
+            margin-bottom: 15px;
+        }
+        
+        .calculator-input {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .calculator-input label {
+            font-weight: 500;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .calculator-input input {
+            padding: 8px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .calculator-result {
+            background: white;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-top: 10px;
+        }
+        
+        .calculator-result .area {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .calculator-result .price {
+            font-weight: bold;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+        
+        /* ===== FOOTER DE LA PÁGINA ===== */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 50px;
+        }
+        
+        /* ===== MODAL DEL CARRITO DE COMPRAS ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 450px;
+            max-height: 80vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: modalFadeIn 0.3s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            padding: 12px 15px;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+        
+        .modal-body {
+            padding: 15px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+        
+        .cart-items {
+            margin-bottom: 15px;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item-info {
+            flex-grow: 1;
+        }
+        
+        .cart-item-title {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .cart-item-price {
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+        
+        .quantity-btn {
+            background: var(--light);
+            border: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.8rem;
+        }
+        
+        .quantity-btn:hover {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .quantity-value {
+            margin: 0 8px;
+            font-weight: bold;
+            min-width: 18px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+        
+        .cart-item-remove:hover {
+            transform: scale(1.1);
+        }
+        
+        .cart-total {
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-align: right;
+            margin: 12px 0;
+            color: var(--primary);
+        }
+        
+        /* ===== PÁGINA DE TÉRMINOS Y CONDICIONES ===== */
+        .terms-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 15px;
+        }
+        
+        .terms-logo {
+            display: block;
+            margin: 0 auto 25px;
+            max-width: 180px;
+            height: auto;
+        }
+        
+        .terms-title {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 12px;
+        }
+        
+        .terms-content {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        .terms-section {
+            margin-bottom: 20px;
+        }
+        
+        .terms-section h3 {
+            color: var(--secondary);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .terms-section p, .terms-section ul {
+            margin-bottom: 12px;
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+        
+        .terms-section ul {
+            padding-left: 18px;
+        }
+        
+        .terms-section li {
+            margin-bottom: 6px;
+        }
+        
+        /* ===== DISEÑO RESPONSIVE PARA TABLETS ===== */
+        @media (max-width: 1024px) {
+            .hero-banner {
+                padding: 50px 0 30px;
+                min-height: 350px;
+            }
+            
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .calculator-inputs {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+        }
+        
+        /* ===== DISEÑO RESPONSIVE PARA MÓVILES ===== */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+            
+            header {
+                padding: 8px 0;
+            }
+            
+            .header-content {
+                gap: 10px;
+            }
+            
+            .logo img {
+                height: 35px;
+            }
+            
+            .mini-gif {
+                width: 35px;
+                height: 35px;
+            }
+            
+            nav ul {
+                gap: 3px;
+            }
+            
+            nav a {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+            
+            .cart-icon {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .back-button-fixed {
+                top: 68px;
+                left: 15px;
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            
+            /* Hero Banner Mobile */
+            .hero-banner {
+                padding: 40px 0 20px;
+                min-height: 100px;
+                margin-top: -60px;
+            }
+            
+            .hero-content-wrapper {
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            align-items: center;
+
+            }
+            
+            .hero-text-content {
+             padding: 15px;
+            }
+
+             .hero-title {
+             font-size: 1.3rem;
+             margin-bottom: 8px;
+             }
+
+.hero-subtitle {
+    font-size: 0.8rem;
+}
+
+.main-gif {
+    animation: float-mobile 3s ease-in-out infinite;
+}
+
+.main-gif img {
+    max-width: 90%;
+
+            }
+            
+            @keyframes float-mobile {
+                0% { transform: translateY(0px); }
+                50% { transform: translateY(-5px); }
+                100% { transform: translateY(0px); }
+            }
+            
+            .section, .detail-page {
+                padding: 40px 0;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+                margin-bottom: 30px;
+            }
+            
+            /* Grid Mobile Mejorado */
+            .services-grid, .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 15px;
+            }
+            
+            .card-image {
+                height: 150px;
+            }
+            
+            .card-content {
+                padding: 12px;
+            }
+            
+            .card-title {
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+            
+            /* Galería Mobile Igual que PC */
+            .detail-secondary-images {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .measurement-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 85%;
+            }
+            
+            .terms-container {
+                padding: 20px 10px;
+            }
+            
+            .terms-content {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-content {
+                flex-wrap: nowrap;
+            }
+            
+            nav ul {
+                gap: 2px;
+            }
+            
+            nav a {
+                padding: 5px 8px;
+                font-size: 0.75rem;
+            }
+            
+            .hero-banner {
+                padding: 30px 0 15px;
+                min-height: 250px;
+            }
+            
+            .hero-title {
+                font-size: 1.4rem;
+            }
+            
+            .services-grid, .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .location-selector {
+                flex-direction: column;
+            }
+            
+            .select-group {
+                min-width: 100%;
+            }
+            
+            .calculator-inputs {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* ===== MODO OSCURO DEL SISTEMA ===== */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1a1a1a;
+                color: #e0e0e0;
+            }
+            
+            header {
+                background-color: rgba(30, 30, 30, 0.98);
+            }
+            
+            .service-card, .product-card, .terms-content,
+            .modal-content, input, textarea, select {
+                background-color: #2d2d2d;
+                color: #e0e0e0;
+                border-color: #444;
+            }
+            
+            .card-description {
+                color: #aaa;
+            }
+            
+            /* ===== MEJORA DE BOTONES EN MODO OSCURO ===== */
+            .btn {
+                color: #ffffff;
+                text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            }
+            
+            .btn-view {
+                color: #ffffff;
+                border-color: #555;
+            }
+            
+            .btn-view:hover {
+                color: #ffffff;
+            }
+            
+            .measurement-selector, .banner-calculator {
+                background-color: #2d2d2d;
+                border-color: #444;
+            }
+            
+            .measurement-option {
+                background-color: #3d3d3d;
+                border-color: #555;
+                color: #e0e0e0;
+            }
+            
+            .calculator-result {
+                background-color: #3d3d3d;
+                border-color: #555;
+                color: #e0e0e0;
+            }
+        }
+
+        /* ===== MEJORAS DE RENDIMIENTO PARA MÓVIL ===== */
+        @media (max-width: 768px) and (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            .main-gif {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== BOTÓN ATRÁS FLOTANTE (SOLO SE MUESTRA EN DETALLES) ===== -->
+    <a href="#" class="back-button-fixed" id="backButtonFixed">
+        <i class="fas fa-arrow-left"></i> Volver
+    </a>
+
+    <!-- ===== HEADER PRINCIPAL CON LOGO Y MENÚ ===== -->
+    <header id="mainHeader">
+        <div class="container header-content">
+            <a href="#" class="logo" id="mainLogo">
+                <img src="logo-arte-bayamo-light.png" alt="Arte Bayamo" id="dynamicLogo">
+            </a>
+            
+            <div class="mini-gif">
+                <img src="mini-logo.png" alt="Tu logo aquí">
+            </div>
+            
+            <nav>
+                <ul>
+                    <!-- ===== MENÚ DE NAVEGACIÓN - PRODUCTOS PRIMERO ===== -->
+                    <li><a href="#" class="nav-link active" data-section="products">Productos</a></li>
+                    <li><a href="#" class="nav-link" data-section="services">Servicios</a></li>
+                    <li><a href="#" class="nav-link" data-section="contact">Contacto</a></li>
+                    <li><a href="#" class="nav-link" data-section="terms">Términos</a></li>
+                    <li class="cart-icon" id="cartIcon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== HERO BANNER PRINCIPAL CON TEXTO Y GIF ===== -->
+    <div class="hero-banner">
+        <div class="container">
+            <div class="hero-content-wrapper">
+                <div class="hero-text-content">
+                    <h1 class="hero-title">Tu tienda online: sublimación única con diseños gratis</h1>
+                    <p class="hero-subtitle">🎁Desde Cuba, creamos regalos personalizados que conectan🎁</p>
+                    
+                    <button class="btn btn-chat" onclick="openTawkTo()">
+                        <i class="fas fa-comments"></i> Enviar mensaje
+                    </button>
+                </div>
+                
+                <div class="hero-gif-content">
+                    <div class="main-gif">
+                        <img src="mujer-cartel-regalos.gif" alt="Mujer con cartel: Envía regalos personalizados">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== CONTENEDOR PRINCIPAL DE TODAS LAS SECCIONES ===== -->
+    <div class="container">
+        <!-- ===== SECCIÓN DE PRODUCTOS (ACTIVA POR DEFECTO) ===== -->
+        <section id="products" class="section active">
+            <h2 class="section-title">Nuestros Productos</h2>
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="card-image">
+                        <img src="taza-personalizada.jpg" alt="Taza Personalizada">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Tazas personalizadas</h3>
+                        <p class="card-description">¡Sorprende a tu ser querido con un detalle único! La taza personalizada es nuestro producto estrella.</p>
+                        <button class="btn btn-view" data-product="1">Ver Producto</button>
+                        <button class="btn btn-chat" onclick="openTawkTo()">
+                            <i class="fas fa-comments"></i> Enviar mensaje
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="card-image">
+                        <img src="llavero-personalizado.jpg" alt="Llavero Personalizado">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Llaveros personalizados</h3>
+                        <p class="card-description">Un detalle único para tus seres queridos. Cada recuerdo es especial.</p>
+                        <button class="btn btn-view" data-product="2">Ver Producto</button>
+                        <button class="btn btn-chat" onclick="openTawkTo()">
+                            <i class="fas fa-comments"></i> Enviar mensaje
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="card-image">
+                        <img src="reloj-personalizado.jpg" alt="Reloj Personalizado">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Reloj de escritorio personalizado</h3>
+                        <p class="card-description">Decora tu espacio con estilo y funcionalidad. Un regalo que sorprende.</p>
+                        <button class="btn btn-view" data-product="3">Ver Producto</button>
+                        <button class="btn btn-chat" onclick="openTawkTo()">
+                            <i class="fas fa-comments"></i> Enviar mensaje
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="card-image">
+                        <img src="agenda-personalizada.jpg" alt="Agenda Personalizada">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Agendas personalizadas</h3>
+                        <p class="card-description">Organiza tu vida con elegancia. Agendas prácticas y con diseños exclusivos.</p>
+                        <button class="btn btn-view" data-product="4">Ver Producto</button>
+                        <button class="btn btn-chat" onclick="openTawkTo()">
+                            <i class="fas fa-comments"></i> Enviar mensaje
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="card-image">
+                        <img src="impresion-fotografica.jpg" alt="Impresión Fotográfica">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Impresión de fotos en papel fotográfico A4</h3>
+                        <p class="card-description">Recuerda tus mejores momentos con impresiones de alta calidad.</p>
+                        <button class="btn btn-view" data-product="5">Ver Producto</button>
+                        <button class="btn btn-chat" onclick="openTawkTo()">
+                            <i class="fas fa-comments"></i> Enviar mensaje
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="card-image">
+                        <img src="camiseta-personalizada.jpg" alt="Camiseta Personalizada">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Camisetas / Pullovers personalizados</h3>
+                        <p class="card-description">Luce único con ropa personalizada. Diseños exclusivos que marcan la diferencia.</p>
+                        <button class="btn btn-view" data-product="6">Ver Producto</button>
+                        <button class="btn btn-chat" onclick="openTawkTo()">
+                            <i class="fas fa-comments"></i> Enviar mensaje
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product 7 -->
+                <div class="product-card">
+                    <div class="card-image">
+                        <img src="vinilo-decorativo.jpg" alt="Vinilo Decorativo">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Vinilos de corte para decoración</h3>
+                        <p class="card-description">Decora tu hogar con frases motivadoras o diseños personalizados a tu gusto.</p>
+                        <button class="btn btn-view" data-product="7">Ver Producto</button>
+                        <button class="btn btn-chat" onclick="openTawkTo()">
+                            <i class="fas fa-comments"></i> Enviar mensaje
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ===== NUEVO PRODUCTO 8 - CUADROS PERSONALIZADOS ===== -->
+                <div class="product-card">
+                    <div class="card-image">
+                        <img src="cuadro-personalizado.jpg" alt="Cuadros Personalizados">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Cuadros personalizados</h3>
+                        <p class="card-description">Decora tus espacios con hermosos cuadros personalizados, impresiones en vinilo y papel fotográfico de alta calidad.</p>
+                        <button class="btn btn-view" data-product="8">Ver Producto</button>
+                        <button class="btn btn-chat" onclick="openTawkTo()">
+                            <i class="fas fa-comments"></i> Enviar mensaje
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ===== NUEVO PRODUCTO 9 - BANNER EN LONA ===== -->
+                <div class="product-card">
+                    <div class="card-image">
+                        <img src="banner-lona.jpg" alt="Banner en Lona">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Banner en lona</h3>
+                        <p class="card-description">Impresión de banners en lona de alta calidad, perfectos para eventos, negocios y promociones.</p>
+                        <button class="btn btn-view" data-product="9">Ver Producto</button>
+                        <button class="btn btn-chat" onclick="openTawkTo()">
+                            <i class="fas fa-comments"></i> Enviar mensaje
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SECCIÓN DE SERVICIOS ===== -->
+        <section id="services" class="section">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="card-image">
+                        <img src="restauracion-fotos.jpg" alt="Restauración de Fotos">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Restauración de fotos antiguas y deterioradas</h3>
+                        <p class="card-description">Recuperamos fotos antiguas dañadas, eliminando manchas y arrugas, para preservar tus recuerdos con calidad profesional.</p>
+                        <button class="btn btn-view" data-service="1">Ver Servicio</button>
+                        <button class="btn btn-chat" onclick="openTawkTo()">
+                            <i class="fas fa-comments"></i> Enviar mensaje
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="card-image">
+                        <img src="restauracion-documentos.jpg" alt="Restauración de Documentos">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Restauración de documentos antiguos</h3>
+                        <p class="card-description">Recuperamos documentos importantes, manteniendo su aspecto original y legibilidad.</p>
+                        <button class="btn btn-view" data-service="2">Ver Servicio</button>
+                        <button class="btn btn-chat" onclick="openTawkTo()">
+                            <i class="fas fa-comments"></i> Enviar mensaje
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="card-image">
+                        <img src="diseno-grafico.jpg" alt="Diseño Gráfico">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Diseño gráfico profesional</h3>
+                        <p class="card-description">Diseños modernos y personalizados para tus proyectos, portafolios y promociones de productos.</p>
+                        <button class="btn btn-view" data-service="3">Ver Servicio</button>
+                        <button class="btn btn-chat" onclick="openTawkTo()">
+                            <i class="fas fa-comments"></i> Enviar mensaje
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="card-image">
+                        <img src="mockups.jpg" alt="Mockups">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Mockups y promociones para redes sociales</h3>
+                        <p class="card-description">Presenta tus productos de manera profesional con mockups y diseños digitales listos para marketing.</p>
+                        <button class="btn btn-view" data-service="4">Ver Servicio</button>
+                        <button class="btn btn-chat" onclick="openTawkTo()">
+                            <i class="fas fa-comments"></i> Enviar mensaje
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card">
+                    <div class="card-image">
+                        <img src="correccion-ia.jpg" alt="Corrección IA">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Corrección profesional de imágenes generadas por IA</h3>
+                        <p class="card-description">Mejoramos y corregimos imágenes generadas por IA, ajustando colores, detalles y proporciones para obtener resultados realistas.</p>
+                        <button class="btn btn-view" data-service="5">Ver Servicio</button>
+                        <button class="btn btn-chat" onclick="openTawkTo()">
+                            <i class="fas fa-comments"></i> Enviar mensaje
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SECCIÓN DE CONTACTO ===== -->
+        <section id="contact" class="section">
+            <h2 class="section-title">Contacto</h2>
+            
+            <!-- Botón de Facebook -->
+            <div style="text-align: center; margin-bottom: 25px;">
+                <a href="https:www.facebook.com/artebayamo" class="btn btn-facebook" target="_blank" id="facebookLink">
+                    <i class="fab fa-facebook-f"></i> Contáctanos en Facebook
+                </a>
+            </div>
+            
+            <div class="contact-form">
+                <div class="form-group">
+                    <label for="name">Nombre:</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensaje:</label>
+                    <textarea id="message" required></textarea>
+                </div>
+                <button type="submit" class="btn" id="contactSubmit">Enviar mensaje</button>
+            </div>
+            <div style="text-align: center; margin-top: 25px;">
+                <button class="btn btn-chat" onclick="openTawkTo()">
+                    <i class="fas fa-comments"></i> Chatear con nosotros
+                </button>
+            </div>
+        </section>
+
+        <!-- ===== SECCIÓN DE TÉRMINOS Y CONDICIONES ===== -->
+        <section id="terms" class="section">
+            <div class="terms-container">
+                <img src="logo-arte-bayamo-light.png" alt="Arte Bayamo" class="terms-logo" id="termsLogo">
+                <h2 class="terms-title">Términos y Políticas de Arte Bayamo</h2>
+                
+                <div class="terms-content">
+                    <!-- Contenido de términos igual que antes -->
+                    <div class="terms-section">
+                        <h3>1. Alcance de nuestros servicios</h3>
+                        <p>Ofrecemos servicios profesionales de diseño y marketing digital, así como productos personalizados (tazas, camisetas, agendas, llaveros, portarretratos, entre otros).</p>
+                        <p>Los productos y servicios están dirigidos principalmente a clientes en el extranjero que deseen enviar regalos o encargar trabajos personalizados para entregar en Cuba.</p>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h3>2. Pagos</h3>
+                        <p>Todos los pagos se realizan de forma segura a través de PayPal.</p>
+                        <p>Los pedidos solo se procesan una vez recibido el pago completo y confirmado.</p>
+                        <p>No se aceptan pagos contra entrega.</p>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h3>3. Entregas</h3>
+                        <p>Las entregas en Cuba se coordinan directamente a través del chat disponible en el sitio web.</p>
+                        <p>Los tiempos de entrega pueden variar según la disponibilidad y la ubicación del destinatario, y serán confirmados con el cliente antes de la entrega.</p>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h3>4. Servicios de diseño</h3>
+                        <p>Cada servicio contratado incluye hasta 3 revisiones sin costo adicional. Revisiones extra tendrán un costo adicional.</p>
+                        <p>El cliente tiene derecho a un diseño gratuito por cada producto comprado. Diseños adicionales se cotizan aparte.</p>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h3>5. Personalización de productos</h3>
+                        <p>Una vez que el cliente aprueba el diseño y el producto ha sido personalizado, no se aceptan cambios ni devoluciones.</p>
+                        <p>El cliente es responsable de revisar bien textos, imágenes y datos antes de confirmar su pedido.</p>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h3>6. Garantía de calidad</h3>
+                        <p>Todos los productos se entregan revisados y en condiciones óptimas.</p>
+                        <p>Solo se aceptan reclamaciones por defectos visibles (roturas, impresiones dañadas o mal funcionamiento) reportados el mismo día de la entrega con evidencias fotográficas.</p>
+                        <p>No se aceptan reclamaciones por errores derivados de información mal enviada por el cliente.</p>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h3>7. Reembolsos</h3>
+                        <p>No se realizan reembolsos una vez confirmado, pagado y/o personalizado el pedido.</p>
+                        <p>En casos excepcionales, Arte Bayamo podrá evaluar devoluciones parciales únicamente si el pedido aún no ha sido producido.</p>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h3>8. Responsabilidad</h3>
+                        <p>Arte Bayamo no se hace responsable por retrasos ocasionados por terceros, situaciones climáticas, transporte o causas ajenas a nuestro control.</p>
+                        <p>No asumimos responsabilidad por daños provocados por un uso inadecuado de los productos una vez entregados.</p>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h3>9. Privacidad</h3>
+                        <p>La información proporcionada por el cliente se utiliza únicamente para procesar pedidos y no se comparte con terceros.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CONTENEDOR PARA PÁGINAS DE DETALLE DE SERVICIOS ===== -->
+        <div id="service-detail-container">
+            <!-- Los detalles de servicios se cargarán aquí dinámicamente -->
+        </div>
+
+        <!-- ===== CONTENEDOR PARA PÁGINAS DE DETALLE DE PRODUCTOS ===== -->
+        <div id="product-detail-container">
+            <!-- Los detalles de productos se cargarán aquí dinámicamente -->
+        </div>
+    </div>
+
+    <!-- ===== FOOTER DE LA PÁGINA ===== -->
+    <footer>
+        <div class="container">
+            <p>© 2025 Arte Bayamo</p>
+        </div>
+    </footer>
+
+    <!-- ===== MODAL DEL CARRITO DE COMPRAS ===== -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Tu Carrito de Compras</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="cart-items" id="cartItems">
+                    <!-- Los items del carrito se agregarán aquí dinámicamente -->
+                    <p class="empty-cart-message">Tu carrito está vacío</p>
+                </div>
+                
+                <div class="cart-total" id="cartTotal">
+                    Total: $0.00
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-view" onclick="closeModal('cartModal')">Seguir comprando</button>
+                    <button class="btn" id="checkoutPaypal">Pagar con PayPal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== CONFIGURACIÓN INICIAL Y FUNCIONES GLOBALES =====
+        
+        // ===== FUNCIÓN PARA ABRIR CHAT TAWK.TO =====
+        function openTawkTo() {
+            if (typeof Tawk_API !== 'undefined') {
+                Tawk_API.maximize();
+            }
+        }
+
+        // ===== FUNCIÓN PARA CAMBIAR LOGO SEGÚN TEMA DEL SISTEMA =====
+        function updateLogoForTheme() {
+            const logo = document.getElementById('dynamicLogo');
+            const termsLogo = document.getElementById('termsLogo');
+            
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                // Tema oscuro
+                if (logo) logo.src = 'logo-arte-bayamo-dark.png';
+                if (termsLogo) termsLogo.src = 'logo-arte-bayamo-dark.png';
+            } else {
+                // Tema claro
+                if (logo) logo.src = 'logo-arte-bayamo-light.png';
+                if (termsLogo) termsLogo.src = 'logo-arte-bayamo-light.png';
+            }
+        }
+
+        // ===== DETECTAR CAMBIOS DE TEMA DEL SISTEMA =====
+        if (window.matchMedia) {
+            const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            colorSchemeQuery.addEventListener('change', updateLogoForTheme);
+        }
+
+        // ===== CONFIGURACIÓN DE ENDPOINTS PIPEDREAM PARA PAYPAL =====
+        const PIPEDREAM_ENDPOINTS = [
+            "https://eo675v7qp45lubk.m.pipedream.net",
+            "https://eo675v7qp45lubk.m.pipedream.net/api",
+            "https://eo675v7qp45lubk.m.pipedream.net/api/webhook"
+        ];
+        
+        let currentEndpointIndex = 0;
+        const WEB_APP_URL = PIPEDREAM_ENDPOINTS[currentEndpointIndex];
+
+        // ===== TABLA DE PRECIOS QUE COINCIDE CON PIPEDREAM =====
+        const priceTable = {
+            // Servicios (IDs 1-5)
+            "S1": 15, "S2": 10, "S3": 30, "S4": 10, "S5": 10,
+            // Productos (IDs 1-7)
+            "P1": 12, "P2": 6, "P3": 15, "P4": 20, "P5": 3, "P6": 12, "P7": 20,
+            // Nuevos productos (IDs 8-9)
+            "P8": 15, // Precio base para cuadros (se actualiza según medida)
+            "P9": 50  // Precio por m² para banners
+        };
+
+        // ===== FUNCIÓN PARA OBTENER PRECIO CORRECTO DESDE LA TABLA =====
+        function getItemPrice(itemType, itemId) {
+            const key = (itemType === 'service' ? 'S' : 'P') + itemId;
+            return priceTable[key] || 0;
+        }
+
+        // ===== FUNCIÓN PARA PROBAR CONEXIÓN CON ENDPOINTS PIPEDREAM =====
+        async function testEndpoint(endpointUrl) {
+            try {
+                const response = await fetch(endpointUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                console.log('Test endpoint status for', endpointUrl, ':', response.status);
+                return response.ok;
+            } catch (error) {
+                console.error('Error testing endpoint', endpointUrl, ':', error);
+                return false;
+            }
+        }
+
+        // ===== FUNCIÓN PARA ENCONTRAR ENDPOINT FUNCIONAL =====
+        async function findWorkingEndpoint() {
+            for (let i = 0; i < PIPEDREAM_ENDPOINTS.length; i++) {
+                const endpoint = PIPEDREAM_ENDPOINTS[i];
+                const isWorking = await testEndpoint(endpoint);
+                if (isWorking) {
+                    console.log('Endpoint funcional encontrado:', endpoint);
+                    currentEndpointIndex = i;
+                    return endpoint;
+                }
+            }
+            throw new Error('No se pudo encontrar un endpoint funcional');
+        }
+
+        // ===== DATOS DE PROVINCIAS Y MUNICIPIOS DE CUBA =====
+        const cubaLocations = {
+            "Pinar del Río": ["Consolación del Sur", "Guane", "La Palma", "Los Palacios", "Mantua", "Minas de Matahambre", "Pinar del Río", "San Juan y Martínez", "San Luis", "Sandino", "Viñales"],
+            "Artemisa": ["Alquízar", "Artemisa", "Bauta", "Caimito", "Guanajay", "Güira de Melena", "Mariel", "San Antonio de los Baños", "Bahía Honda", "Candelaria", "San Cristóbal"],
+            "La Habana": ["Arroyo Naranjo", "Boyeros", "Centro Habana", "Cerro", "Cotorro", "Diez de Octubre", "Guanabacoa", "La Habana del Este", "La Habana Vieja", "La Lisa", "Marianao", "Playa", "Plaza de la Revolución", "Regla", "San Miguel del Padrón"],
+            "Mayabeque": ["Batabanó", "Bejucal", "Güines", "Jaruco", "Madruga", "Melena del Sur", "Nueva Paz", "Quivicán", "San José de las Lajas", "Santa Cruz del Norte"],
+            "Matanzas": ["Calimete", "Cárdenas", "Ciénaga de Zapata", "Colón", "Jagüey Grande", "Jovellanos", "Limonar", "Los Arabos", "Martí", "Matanzas", "Pedro Betancourt", "Perico", "Unión de Reyes"],
+            "Villa Clara": ["Caibarién", "Camajuaní", "Cifuentes", "Corralillo", "Encrucijada", "Manicaragua", "Placetas", "Quemado de Güines", "Remedios", "Sagua la Grande", "Santa Clara", "Santo Domingo"],
+            "Cienfuegos": ["Abreus", "Aguada de Pasajeros", "Cienfuegos", "Cruces", "Cumanayagua", "Palmira", "Rodas", "Santa Isabel de las Lajas"],
+            "Sancti Spíritus": ["Cabaiguán", "Fomento", "Jatibonico", "La Sierpe", "Sancti Spíritus", "Taguasco", "Trinidad", "Yaguajay"],
+            "Ciego de Ávila": ["Baraguá", "Bolivia", "Chambas", "Ciego de Ávila", "Ciro Redondo", "Florencia", "Majagua", "Morón", "Primero de Enero", "Venezuela"],
+            "Camagüey": ["Camagüey", "Carlos M. de Céspedes", "Esmeralda", "Florida", "Guáimaro", "Jimaguayú", "Minas", "Najasa", "Nuevitas", "Sibanicú", "Sierra de Cubitas", "Vertientes"],
+            "Las Tunas": ["Amancio", "Colombia", "Jesús Menéndez", "Jobabo", "Las Tunas", "Majibacoa", "Manatí", "Puerto Padre"],
+            "Granma": ["Bartolomé Masó", "Bayamo", "Buey Arriba", "Campechuela", "Cauto Cristo", "Guisa", "Jiguaní", "Manzanillo", "Media Luna", "Niquero", "Pilón", "Río Cauto", "Yara"],
+            "Holguín": ["Antilla", "Báguanos", "Banes", "Cacocum", "Calixto García", "Cueto", "Frank País", "Gibara", "Holguín", "Mayarí", "Moa", "Rafael Freyre", "Sagua de Tánamo", "Urbano Noris"],
+            "Santiago de Cuba": ["Contramaestre", "Guamá", "Mella", "Palma Soriano", "San Luis", "Santiago de Cuba", "Segundo Frente", "Songo-La Maya", "Tercer Frente"],
+            "Guantánamo": ["Baracoa", "Caimanera", "El Salvador", "Guantánamo", "Imías", "Maisí", "Manuel Tames", "Niceto Pérez", "San Antonio del Sur", "Yateras"]
+        };
+
+        // ===== DATOS DE SERVICIOS CON DESCRIPCIONES EXTENDIDAS =====
+        const services = {
+            1: {
+                title: "Restauración de fotos antiguas y deterioradas",
+                description: "Recuperamos fotos antiguas dañadas, eliminando manchas y arrugas, para preservar tus recuerdos con calidad profesional.",
+                extendedDescription: "<p>Nuestro servicio de restauración fotográfica devuelve la vida a tus recuerdos más preciados. Utilizamos tecnología avanzada y técnicas profesionales para:</p><ul><li>Eliminar manchas, rasgaduras y arrugas</li><li>Corregir decoloración y desvanecimiento</li><li>Reparar esquinas dañadas y bordes faltantes</li><li>Mejorar la claridad y el enfoque</li><li>Ajustar iluminación y contraste</li></ul><p>Ideal para fotografías familiares históricas, retratos y imágenes con valor sentimental.</p>",
+                price: 15,
+                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+                images: ["restauracion-foto1.jpg", "restauracion-foto2.jpg", "restauracion-foto3.jpg"]
+            },
+            2: {
+                title: "Restauración de documentos antiguos",
+                description: "Recuperamos documentos importantes, manteniendo su aspecto original y legibilidad.",
+                extendedDescription: "<p>Preserva documentos históricos o importantes con nuestro servicio especializado de restauración. Nuestro proceso incluye:</p><ul><li>Limpieza profunda sin dañar el papel</li><li>Reparación de rasgaduras y perforaciones</li><li>Refuerzo de áreas debilitadas</li><li>Estabilización de tinta và pigmentos</li><li>Digitalización para preservación adicional</li></ul><p>Perfecto para certificados, mapas, cartas históricas y documentos legales importantes.</p>",
+                price: 10,
+                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+                images: ["restauracion-doc1.jpg", "restauracion-doc2.jpg", "restauracion-doc3.jpg"]
+            },
+            3: {
+                title: "Diseño gráfico profesional",
+                description: "Diseños modernos y personalizados para tus proyectos, portafolios y promociones de productos.",
+                extendedDescription: "<p>Ofrecemos soluciones de diseño gráfico creativas y profesionales para todas tus necesidades:</p><ul><li>Logotipos e identidad corporativa</li><li>Material promocional (folletos, flyers, banners)</li><li>Diseño para redes sociales</li><li>Presentaciones profesionales</li><li>Portadas de libros y revistas</li><li>Ilustraciones personalizadas</li></ul><p>Trabajamos contigo para crear diseños que comuniquen efectivamente tu mensaje y destaquen tu marca.</p>",
+                price: 30,
+                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+                images: ["diseno1.jpg", "diseno2.jpg", "diseno3.jpg"]
+            },
+            4: {
+                title: "Mockups y promociones para redes sociales",
+                description: "Presenta tus productos de manera profesional con mockups y diseños digitales listos para marketing.",
+                extendedDescription: "<p>Creamos presentaciones visuales atractivas para mostrar tus productos o servicios de la mejor manera:</p><ul><li>Mockups realistas de productos</li><li>Diseños optimizados para Instagram, Facebook y otras plataformas</li><li>Plantillas personalizables para marketing continuo</li><li>Banners y gráficos para tiendas online</li><li>Imágenes para catálogos y folletos digitales</li></ul><p>Ideal para emprendedores, pequeñas empresas y creadores de contenido que buscan destacar en el competitivo mundo digital.</p>",
+                price: 10,
+                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+                images: ["mockup1.jpg", "mockup2.jpg", "mockup3.jpg"]
+            },
+            5: {
+                title: "Corrección profesional de imágenes generadas por IA",
+                description: "Mejoramos y corregimos imágenes generadas por IA, ajustando colores, detalles y proporciones para obtener resultados realistas.",
+                extendedDescription: "<p>Las imágenes generadas por IA a menudo necesitan ajustes para alcanzar un aspecto profesional y realista. Nuestro servicio incluye:</p><ul><li>Corrección de proporciones anatómicas</li><li>Ajuste de colores y iluminación</li><li>Mejora de detalles y texturas</li><li>Corrección de artefactos y errores visuales</li><li>Integración de elementos realistas</li><li>Optimización para diferentes usos (impresión, web, etc.)</li></ul><p>Transformamos tus creaciones de IA en imágenes listas para uso profesional.</p>",
+                price: 10,
+                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+                images: ["ia1.jpg", "ia2.jpg", "ia3.jpg"]
+            }
+        };
+
+        // ===== DATOS DE PRODUCTOS CON DESCRIPCIONES EXTENDIDAS =====
+        const products = {
+            1: {
+                title: "Tazas personalizadas",
+                description: "¡Sorprende a tu ser querido con un detalle único! La taza personalizada es nuestro producto estrella.",
+                extendedDescription: "<p>Nuestras tazas personalizadas son el regalo perfecto para cualquier ocasión. Características:</p><ul><li>Material: Cerámica de alta calidad</li><li>Capacidad: 325ml</li><li>Diseño personalizado a todo color</li><li>Resistente al microondas y lavavajillas</li><li>Impresión duradera que no se desgasta</li></ul><p>Puedes personalizarla con fotos, nombres, mensajes especiales o diseños únicos. ¡Haz que cada mañana sea especial con una taza que realmente representa a quien la usa!</p>",
+                price: 12,
+                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+                images: ["taza1.jpg", "taza2.jpg", "taza3.jpg"],
+                shippingAvailable: true
+            },
+            2: {
+               title: "Llaveros Personalizados en PVC Sublimable",
+description: "Un detalle práctico y duradero para enviar a tus seres queridos en Cuba.",
+extendedDescription: "<p><strong>Llaveros Personalizados en PVC Sublimable</strong><br>Un detalle práctico y duradero para enviar a tus seres queridos en Cuba.</p><ul><li>Material: PVC sublimable de alta calidad</li><li>Tamaños: variados (ejemplo: redondo de 3.8 cm de diámetro)</li><li>Impresión full color por ambas caras</li><li>Anillo metálico resistente</li><li>Acabado suave y profesional</li></ul><p>Perfectos para regalar a familiares y amigos en Cuba, ya sea como recuerdo especial, detalle de cariño o presente único. Personalízalos con fotos, mensajes o logos y sorprende a los tuyos con un regalo que conecta a la distancia.</p>",
+price: 6,
+paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+images: ["llavero1.jpg", "llavero2.jpg", "llavero3.jpg"],
+shippingAvailable: true
+},
+
+           3: {
+    title: "Reloj de escritorio personalizado",
+    description: "Funcionalidad y estilo en un detalle único para enviar a tus seres queridos en Cuba.",
+    extendedDescription: "<p><strong>Relojes de Escritorio Personalizados</strong><br>Funcionalidad y estilo en un detalle único para enviar a tus seres queridos en Cuba.</p><ul><li>Base cuadrada de 10.4 x 10.4 cm con bordes redondeados</li><li>Material: madera o PVC sublimable de 3 mm de grosor</li><li>Mecanismo quartz preciso y silencioso</li><li>Diseño personalizado en la esfera</li><li>Funciona con pila AA (incluida)</li></ul><p>Perfecto para oficinas, escritorios en casa o como regalo especial. Personalízalo con fotos, logos o diseños que hagan único tu regalo y sorprende a familiares y amigos en Cuba con un detalle que combina utilidad y cariño.</p>",
+    price: 15,
+    paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+    images: ["reloj1.jpg", "reloj2.jpg", "reloj3.jpg"],
+    shippingAvailable: true
+},
+
+        4: {
+    title: "Agendas personalizadas hechas a mano",
+    description: "Agendas únicas y funcionales para sorprender a tus seres queridos en Cuba.",
+    extendedDescription: "<p><strong>Agendas Personalizadas Hechas a Mano – Organización y Estilo</strong><br>Agendas únicas, hechas a mano, cocidas y pegadas con materiales de alta calidad, diseñadas para mantener la vida organizada y sorprender a tus seres queridos en Cuba.</p><ul><li>Tamaño A5 (14.8 x 21 cm)</li><li>Portada dura forrada en vinil sintético de alta calidad, disponible en varios colores</li><li>Diseño de la página de portada personalizado con fotos o diseños que el cliente desee (diseño gratis incluido)</li><li>120 páginas de papel de alta calidad</li><li>Sección para datos personales, información de interés y números telefónicos importantes, incluyendo códigos de países</li><li>Calendario anual de 3 años y calendario perpetuo</li><li>Mapa del mundo al final de la agenda</li><li>Espacio para notas y contactos</li><li>Diseño interior práctico con calendario anual, mensual y semanal</li><li>Cierre elástico para mantener todo seguro</li></ul><p>Perfecta para profesionales, estudiantes o cualquier persona que valore la organización con estilo. Envía un regalo único y funcional que combina utilidad, diseño personalizado y cariño a familiares o amigos en Cuba.</p>",
+    price: 20,
+    paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+    images: ["agenda1.jpg", "agenda2.jpg", "agenda3.jpg"],
+    shippingAvailable: true
+},
+
+            5: {
+                title: "Impresión de fotos en papel fotográfico A4",
+                description: "Recuerda tus mejores momentos con impresiones de alta calidad.",
+                extendedDescription: "<p>Preserva tus recuerdos con impresiones fotográficas de alta calidad. Características:</p><ul><li>Tamaño A4 (21 x 29.7 cm)</li><li>Papel fotográfico premium de 180g</li><li>Impresión a color de alta resolución</li><li>Resistente a la decoloración (hasta 100 años)</li><li>Acabado brillo o mate (según preferencia)</li></ul><p>Perfecto para enmarcar, crear álbumes fotográficos, o decorar tus espacios con tus momentos especiales. Desde retratos familiares hasta paisajes impresionantes, cada impresión captura la esencia del momento.</p>",
+                price: 3,
+                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+                images: ["fotoimpresa1.jpg", "fotoimpresa2.jpg", "fotoimpresa3.jpg"],
+                shippingAvailable: true
+            },
+          6: {
+    title: "Camisetas y Pullovers Personalizados",
+    description: "Expresa tu estilo y envía un regalo único a tus seres queridos en Cuba con prendas sublimadas o con vinilo textil.",
+    extendedDescription: "<p><strong>Prendas Personalizadas – Estilo y Originalidad</strong><br>Expresa tu estilo y envía un regalo único a tus seres queridos en Cuba con nuestras prendas sublimadas o con vinilo textil.</p><ul><li>Tejido 100 % poliéster blanco, ideal para sublimación</li><li>Pullovers de tejido suave y cálido, también sublimables</li><li>Talles desde S hasta XXL</li><li>Estampado de alta calidad que no se decolora ni se agrieta</li><li>Diseños personalizados o plantillas disponibles (diseño gratis incluido)</li><li>Perfecto para regalos, eventos familiares, equipos de trabajo o para expresar tu personalidad única</li></ul><p>Crea un regalo práctico, duradero y personalizado que sorprenderá a familiares o amigos en Cuba con un toque de estilo y cariño.</p>",
+    price: 12,
+    paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+    images: ["camiseta1.jpg", "camiseta2.jpg", "camiseta3.jpg"],
+    shippingAvailable: true
+},
+
+            7: {
+                title: "Vinilos de corte para decoración",
+                description: "Decora tu hogar con frases motivadoras o diseños personalizados a tu gusto.",
+                extendedDescription: "<p>Transforma tus espacios con nuestros vinilos decorativos personalizados. Características:</p><ul><li>Vinilo de corte de alta calidad y durabilidad</li><li>Resistente al agua y a los rayos UV</li><li>Fácil aplicación y removible sin dañar superficies</li><li>Variedad de colores disponibles</li><li>Diseños personalizados según tus especificaciones</li></ul><p>Perfecto para decorar paredes, espejos, ventanas, laptops, o cualquier superficie lisa. Desde frases inspiradoras hasta diseños decorativos únicos, nuestros vinilos añaden personalidad a cualquier espacio.</p>",
+                price: 20,
+                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+                images: ["vinilo1.jpg", "vinilo2.jpg", "vinilo3.jpg"],
+                shippingAvailable: true
+            },
+
+            // ===== NUEVO PRODUCTO 8 - CUADROS PERSONALIZADOS =====
+            8: {
+                title: "Cuadros personalizados",
+                description: "Decora tus espacios con hermosos cuadros personalizados, impresiones en vinilo y papel fotográfico de alta calidad.",
+                extendedDescription: "<p><strong>Cuadros Personalizados – Elegancia y Personalización</strong><br>Transforma tus espacios con cuadros personalizados de alta calidad que capturan tus momentos más especiales. Ofrecemos diferentes formatos y materiales para adaptarnos a tus necesidades.</p><ul><li>Impresión en vinilo de alta resolución para interiores</li><li>Papel fotográfico premium resistente a la decoloración</li><li>Marcos de madera de diferentes estilos y colores</li><li>Protección UV para mayor durabilidad</li><li>Acabado profesional listo para colgar</li></ul><p>Ideal para decorar hogares, oficinas, o como regalo especial para familiares y amigos. Captura tus recuerdos más preciados y dales un lugar especial en tu espacio.</p>",
+                price: 15, // Precio base - se actualiza según medida seleccionada
+                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+                images: ["cuadro1.jpg", "cuadro2.jpg", "cuadro3.jpg"],
+                shippingAvailable: true,
+                measurements: [
+                    { size: "8x12 pulgadas", price: 15, dimensions: "20x30 cm" },
+                    { size: "12x18 pulgadas", price: 25, dimensions: "30x45 cm" },
+                    { size: "16x24 pulgadas", price: 35, dimensions: "40x60 cm" },
+                    { size: "20x30 pulgadas", price: 45, dimensions: "50x75 cm" }
+                ]
+            },
+
+            // ===== NUEVO PRODUCTO 9 - BANNER EN LONA =====
+            9: {
+                title: "Banner en lona",
+                description: "Impresión de banners en lona de alta calidad, perfectos para eventos, negocios y promociones.",
+                extendedDescription: "<p><strong>Banners en Lona – Impacto Visual Profesional</strong><br>Creamos banners publicitarios y decorativos en lona de alta calidad, ideales para eventos, negocios, ferias y promociones especiales.</p><ul><li>Lona publicitaria de alta resistencia</li><li>Impresión a todo color de alta resolución</li><li>Resistente a la intemperie y rayos UV</li><li>Ojales metálicos para fácil instalación</li><li>Acabado profesional con refuerzos en bordes</li><li>Ideal para uso interior y exterior</li></ul><p>Perfecto para promociones comerciales, eventos especiales, señalización o cualquier ocasión que requiera un impacto visual profesional y duradero.</p>",
+                price: 50, // Precio por m²
+                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+                images: ["banner1.jpg", "banner2.jpg", "banner3.jpg"],
+                shippingAvailable: true,
+                pricePerSquareMeter: 50
+            }
+        };
+
+        // ===== VARIABLES DEL CARRITO DE COMPRAS =====
+        let cart = [];
+        const cartIcon = document.getElementById('cartIcon');
+        const cartCount = document.querySelector('.cart-count');
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+        const cartModal = document.getElementById('cartModal');
+        const checkoutPaypal = document.getElementById('checkoutPaypal');
+
+        // ===== VARIABLES PARA PRODUCTOS ESPECIALES =====
+        let selectedMeasurement = null;
+        let bannerPrice = 0;
+
+        // ===== EVENT LISTENER PARA BOTÓN DE PAGO PAYPAL =====
+        checkoutPaypal.addEventListener('click', async function() {
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío');
+                return;
+            }
+            
+            // Validar ubicación para productos físicos
+            const hasPhysicalProducts = cart.some(item => item.type === 'product');
+            if (hasPhysicalProducts) {
+                const provinceSelect = document.getElementById('province');
+                const municipalitySelect = document.getElementById('municipality');
+                
+                if (provinceSelect && municipalitySelect) {
+                    const province = provinceSelect.value;
+                    const municipality = municipalitySelect.value;
+                    
+                    if (!province || !municipality) {
+                        alert('Por favor, selecciona tu ubicación para productos físicos.');
+                        return;
+                    }
+                    
+                    const isAvailable = checkShippingAvailability(province, municipality);
+                    if (!isAvailable) {
+                        const proceed = confirm('El envío no está disponible para tu ubicación. ¿Deseas continuar para consultar alternativas?');
+                        if (!proceed) return;
+                    }
+                }
+            }
+            
+            try {
+                // Mostrar carga
+                const originalText = checkoutPaypal.innerHTML;
+                checkoutPaypal.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
+                checkoutPaypal.disabled = true;
+                
+                // Preparar datos
+                const payload = {
+                    items: cart.map(item => ({
+                        type: item.type,
+                        id: item.id,
+                        title: item.title.substring(0, 100),
+                        price: getItemPrice(item.type, item.id),
+                        quantity: Math.min(Math.max(1, item.quantity), 10)
+                    })),
+                    total: cart.reduce((sum, item) => sum + (getItemPrice(item.type, item.id) * item.quantity), 0),
+                    currency: "USD"
+                };
+                
+                console.log("Enviando datos:", payload);
+                
+                // Validar total
+                if (payload.total <= 0) {
+                    throw new Error('El total debe ser mayor a 0');
+                }
+                
+                // Buscar endpoint funcional
+                const workingEndpoint = await findWorkingEndpoint();
+                console.log('Usando endpoint:', workingEndpoint);
+                
+                // Enviar a Pipedream con timeout
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 segundos timeout
+                
+                const response = await fetch(workingEndpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload),
+                    signal: controller.signal
+                });
+                
+                clearTimeout(timeoutId);
+                
+                console.log('Response status:', response.status);
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('Error response:', errorText);
+                    
+                    if (response.status === 404) {
+                        // Rotar al siguiente endpoint
+                        currentEndpointIndex = (currentEndpointIndex + 1) % PIPEDREAM_ENDPOINTS.length;
+                        throw new Error(`Endpoint no encontrado (404). Probando siguiente opción...`);
+                    }
+                    
+                    throw new Error(`Error del servidor: ${response.status} - ${errorText}`);
+                }
+                
+                const result = await response.json();
+                console.log('Success response:', result);
+                
+                if (result.success && result.approvalUrl) {
+                    // Redirigir a PayPal
+                    window.location.href = result.approvalUrl;
+                } else {
+                    throw new Error(result.error || 'Error al crear la orden de pago');
+                }
+                
+            } catch (error) {
+                console.error('Error en el checkout:', error);
+                
+                let errorMessage = 'Error al procesar el pago. ';
+                
+                if (error.name === 'AbortError') {
+                    errorMessage += 'Tiempo de espera agotado. Verifica tu conexión a internet.';
+                } else if (error.message.includes('404')) {
+                    errorMessage += error.message;
+                    // Intentar automáticamente con el siguiente endpoint
+                    setTimeout(() => {
+                        checkoutPaypal.click();
+                    }, 1000);
+                } else if (error.message.includes('fetch') || error.message.includes('Network')) {
+                    errorMessage += 'Problema de conexión. Verifica tu internet.';
+                } else if (error.message.includes('CORS')) {
+                    errorMessage += 'Error de seguridad del navegador. Intenta en otro navegador.';
+                } else {
+                    errorMessage += error.message;
+                }
+                
+                alert(errorMessage);
+                
+                // Restaurar botón
+                checkoutPaypal.innerHTML = 'Pagar con PayPal';
+                checkoutPaypal.disabled = false;
+            }
+        });
+
+        // ===== INICIALIZACIÓN DE LA PÁGINA CUANDO SE CARGA =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // Actualizar logo según tema
+            updateLogoForTheme();
+            
+            // Forzar productos como sección activa
+            showSection('products');
+            
+            // Actualizar navegación
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.querySelector('[data-section="products"]').classList.add('active');
+            
+            // ===== CONFIGURACIÓN DE EVENT LISTENERS PARA NAVEGACIÓN =====
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const section = this.getAttribute('data-section');
+                    showSection(section);
+                    
+                    // Scroll automático al inicio de la sección
+                    setTimeout(() => {
+                        const sectionElement = document.getElementById(section);
+                        if (sectionElement) {
+                            const sectionTop = sectionElement.offsetTop - 80;
+                            window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+                        }
+                    }, 100);
+                    
+                    // Actualizar clase activa
+                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Ocultar botón atrás fijo
+                    hideBackButton();
+                });
+            });
+            
+            // ===== LOGO PRINCIPAL - CLICK PARA IR A PRODUCTOS =====
+            document.getElementById('mainLogo').addEventListener('click', function(e) {
+                e.preventDefault();
+                showSection('products');
+                
+                // Scroll al inicio
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Actualizar clase activa
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                document.querySelector('[data-section="products"]').classList.add('active');
+                
+                // Ocultar botón atrás fijo
+                hideBackButton();
+            });
+            
+            // ===== BOTONES DE VER PRODUCTO =====
+            document.querySelectorAll('[data-product]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-product');
+                    showProductDetail(productId);
+                });
+            });
+            
+            // ===== BOTONES DE VER SERVICIO =====
+            document.querySelectorAll('[data-service]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const serviceId = this.getAttribute('data-service');
+                    showServiceDetail(serviceId);
+                });
+            });
+            
+            // ===== CONFIGURACIÓN DEL CARRITO =====
+            cartIcon.addEventListener('click', function() {
+                openModal('cartModal');
+                updateCartDisplay();
+            });
+            
+            // ===== BOTÓN CERRAR MODAL DEL CARRITO =====
+            document.querySelector('.close-modal').addEventListener('click', function() {
+                closeModal('cartModal');
+            });
+            
+            // ===== BOTÓN ATRÁS FLOTANTE =====
+            document.getElementById('backButtonFixed').addEventListener('click', function(e) {
+                e.preventDefault();
+                goBack();
+            });
+            
+            // ===== INICIALIZAR SELECTORES DE UBICACIÓN =====
+            initLocationSelectors();
+            
+            // ===== CONFIGURACIÓN DEL FORMULARIO DE CONTACTO =====
+            const contactSubmit = document.getElementById('contactSubmit');
+            if (contactSubmit) {
+                contactSubmit.addEventListener('click', sendContactEmail);
+            }
+            
+            // ===== PROBAR ENDPOINTS AL CARGAR LA PÁGINA =====
+            setTimeout(() => {
+                findWorkingEndpoint().catch(error => {
+                    console.warn('No se pudo encontrar endpoint funcional al iniciar:', error);
+                });
+            }, 2000);
+        });
+
+        // ===== FUNCIÓN PARA VERIFICAR DISPONIBILIDAD DE ENVÍO =====
+        function checkShippingAvailability(province, municipality) {
+            return province === "Granma" && municipality === "Bayamo";
+        }
+
+        // ===== FUNCIÓN PARA ACTUALIZAR ESTADO DE ENVÍO =====
+        function updateShippingStatus() {
+            const provinceSelect = document.getElementById('province');
+            const municipalitySelect = document.getElementById('municipality');
+            const shippingStatus = document.querySelector('.shipping-status');
+            
+            if (!provinceSelect || !municipalitySelect || !shippingStatus) return;
+            
+            const province = provinceSelect.value;
+            const municipality = municipalitySelect.value;
+            
+            if (province && municipality) {
+                const isAvailable = checkShippingAvailability(province, municipality);
+                
+                if (isAvailable) {
+                    shippingStatus.innerHTML = '<span class="available"><i class="fas fa-check-circle"></i> Envío disponible gratis a Bayamo</span>';
+                } else {
+                    shippingStatus.innerHTML = '<span class="unavailable"><i class="fas fa-times-circle"></i> Ubicación no disponible por el momento, estamos trabajando para llegar a más lugares</span>';
+                }
+                
+                updateProductButtons();
+            }
+        }
+
+        // ===== FUNCIÓN PARA ACTUALIZAR BOTONES DE PRODUCTOS ESPECIALES =====
+        function updateProductButtons() {
+            const provinceSelect = document.getElementById('province');
+            const municipalitySelect = document.getElementById('municipality');
+            
+            if (!provinceSelect || !municipalitySelect) return;
+            
+            const province = provinceSelect.value;
+            const municipality = municipalitySelect.value;
+            const isAvailable = checkShippingAvailability(province, municipality);
+            
+            const addToCartBtn = document.querySelector('.action-buttons .btn:first-child');
+            const buyNowBtn = document.querySelector('.action-buttons .btn:nth-child(2)');
+            
+            if (addToCartBtn && buyNowBtn) {
+                const productId = document.querySelector('.detail-page')?.getAttribute('data-product-id');
+                const product = products[productId];
+                
+                if (!product) return;
+                
+                // Validar según el tipo de producto
+                let canEnableButtons = isAvailable;
+                
+                if (productId == 8) { // Cuadros personalizados
+                    canEnableButtons = canEnableButtons && selectedMeasurement !== null;
+                } else if (productId == 9) { // Banner en lona
+                    canEnableButtons = canEnableButtons && bannerPrice > 0;
+                }
+                
+                if (canEnableButtons) {
+                    addToCartBtn.classList.remove('btn-disabled');
+                    addToCartBtn.disabled = false;
+                    addToCartBtn.setAttribute('onclick', `addToCart('product', ${productId})`);
+                    
+                    buyNowBtn.classList.remove('btn-disabled');
+                    buyNowBtn.removeAttribute('onclick');
+                    
+                    // Actualizar enlace PayPal según el producto
+                    if (productId == 8 && selectedMeasurement) {
+                        buyNowBtn.setAttribute('href', `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=TU_EMAIL&item_name=Cuadro Personalizado ${selectedMeasurement.size}&amount=${selectedMeasurement.price}&currency_code=USD`);
+                    } else if (productId == 9 && bannerPrice > 0) {
+                        buyNowBtn.setAttribute('href', `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=TU_EMAIL&item_name=Banner en Lona&amount=${bannerPrice}&currency_code=USD`);
+                    } else {
+                        buyNowBtn.setAttribute('href', product.paypalLink);
+                    }
+                } else {
+                    addToCartBtn.classList.add('btn-disabled');
+                    addToCartBtn.disabled = true;
+                    addToCartBtn.removeAttribute('onclick');
+                    
+                    buyNowBtn.classList.add('btn-disabled');
+                    buyNowBtn.setAttribute('onclick', 'return false;');
+                    buyNowBtn.removeAttribute('href');
+                }
+            }
+        }
+
+        // ===== FUNCIÓN PARA SELECCIONAR MEDIDA DE CUADRO =====
+        function selectMeasurement(measurementIndex, productId) {
+            const product = products[productId];
+            if (!product || !product.measurements) return;
+            
+            const measurement = product.measurements[measurementIndex];
+            selectedMeasurement = measurement;
+            
+            // Actualizar UI
+            document.querySelectorAll('.measurement-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            document.querySelector(`.measurement-option[data-index="${measurementIndex}"]`).classList.add('selected');
+            
+            // Actualizar mensaje
+            const measurementTitle = document.querySelector('.measurement-title');
+            measurementTitle.textContent = `✅ Medida seleccionada: ${measurement.size}`;
+            measurementTitle.classList.add('valid');
+            
+            // Actualizar precio
+            document.querySelector('.detail-price').textContent = `Precio: $${measurement.price.toFixed(2)}`;
+            
+            // Actualizar botones
+            updateProductButtons();
+        }
+
+        // ===== FUNCIÓN PARA CALCULAR PRECIO DE BANNER =====
+        function calculateBannerPrice() {
+            const widthInput = document.getElementById('banner-width');
+            const heightInput = document.getElementById('banner-height');
+            
+            if (!widthInput || !heightInput) return;
+            
+            const width = parseFloat(widthInput.value) || 0;
+            const height = parseFloat(heightInput.value) || 0;
+            
+            if (width > 0 && height > 0) {
+                const area = width * height;
+                bannerPrice = area * products[9].pricePerSquareMeter;
+                
+                // Actualizar UI
+                document.querySelector('.calculator-result .area').textContent = `Área: ${area.toFixed(2)} m²`;
+                document.querySelector('.calculator-result .price').textContent = `Precio: $${bannerPrice.toFixed(2)}`;
+                
+                // Actualizar mensaje
+                const measurementTitle = document.querySelector('.measurement-title');
+                measurementTitle.textContent = `✅ Precio calculado: $${bannerPrice.toFixed(2)}`;
+                measurementTitle.classList.add('valid');
+                
+                // Actualizar precio principal
+                document.querySelector('.detail-price').textContent = `Precio: $${bannerPrice.toFixed(2)}`;
+            } else {
+                bannerPrice = 0;
+                document.querySelector('.calculator-result .area').textContent = `Área: 0 m²`;
+                document.querySelector('.calculator-result .price').textContent = `Precio: $0.00`;
+                
+                const measurementTitle = document.querySelector('.measurement-title');
+                measurementTitle.textContent = '🔴 Ingrese las medidas del banner';
+                measurementTitle.classList.remove('valid');
+            }
+            
+            // Actualizar botones
+            updateProductButtons();
+        }
+
+        // ===== FUNCIONES DE VISIBILIDAD DEL BOTÓN ATRÁS FLOTANTE =====
+        function showBackButton() {
+            document.getElementById('backButtonFixed').classList.add('show');
+        }
+        
+        function hideBackButton() {
+            document.getElementById('backButtonFixed').classList.remove('show');
+        }
+        
+        // ===== FUNCIÓN PARA VOLVER ATRÁS DESDE PÁGINAS DE DETALLE =====
+        function goBack() {
+            const detailPages = document.querySelectorAll('.detail-page.active');
+            if (detailPages.length > 0) {
+                // Volver a la sección correspondiente
+                const isService = detailPages[0].getAttribute('data-service-id');
+                const section = isService ? 'services' : 'products';
+                showSection(section);
+                
+                // Scroll al inicio de la sección
+                setTimeout(() => {
+                    const sectionElement = document.getElementById(section);
+                    if (sectionElement) {
+                        const sectionTop = sectionElement.offsetTop - 80;
+                        window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+                    }
+                }, 100);
+                
+                // Actualizar navegación
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                document.querySelector(`[data-section="${section}"]`).classList.add('active');
+                
+                hideBackButton();
+            }
+        }
+
+        // ===== FUNCIÓN PARA MOSTRAR SECCIÓN PRINCIPAL =====
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Ocultar detalles
+            document.getElementById('service-detail-container').innerHTML = '';
+            document.getElementById('product-detail-container').innerHTML = '';
+            
+            // Mostrar sección seleccionada
+            const sectionElement = document.getElementById(sectionId);
+            if (sectionElement) {
+                sectionElement.classList.add('active');
+            }
+        }
+
+        // ===== FUNCIÓN PARA MOSTRAR DETALLE DE PRODUCTO =====
+        function showProductDetail(productId) {
+            const product = products[productId];
+            if (!product) return;
+            
+            // Resetear variables
+            selectedMeasurement = null;
+            bannerPrice = 0;
+            
+            // Ocultar secciones principales
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Determinar contenido específico según el producto
+            let specificContent = '';
+            
+            if (productId == 8) { // Cuadros personalizados
+                specificContent = `
+                    <div class="measurement-selector">
+                        <div class="measurement-title">🔴 Seleccione la medida aquí:</div>
+                        <div class="measurement-options">
+                            ${product.measurements.map((measurement, index) => `
+                                <div class="measurement-option" data-index="${index}" onclick="selectMeasurement(${index}, ${productId})">
+                                    <div class="size">${measurement.size}</div>
+                                    <div class="dimensions">${measurement.dimensions}</div>
+                                    <div class="price">$${measurement.price.toFixed(2)}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            } else if (productId == 9) { // Banner en lona
+                specificContent = `
+                    <div class="banner-calculator">
+                        <div class="measurement-title">🔴 Ingrese las medidas del banner:</div>
+                        <div class="calculator-inputs">
+                            <div class="calculator-input">
+                                <label for="banner-width">Ancho (metros):</label>
+                                <input type="number" id="banner-width" step="0.1" min="0.1" max="10" placeholder="Ej: 2.0">
+                            </div>
+                            <div class="calculator-input">
+                                <label for="banner-height">Alto (metros):</label>
+                                <input type="number" id="banner-height" step="0.1" min="0.1" max="10" placeholder="Ej: 1.0">
+                            </div>
+                            <button class="btn" onclick="calculateBannerPrice()">Calcular Precio</button>
+                        </div>
+                        <div class="calculator-result">
+                            <div class="area">Área: 0 m²</div>
+                            <div class="price">Precio: $0.00</div>
+                            <small>Precio: $${product.pricePerSquareMeter}/m²</small>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Crear HTML del detalle
+            const detailHTML = `
+                <div class="detail-page active" data-product-id="${productId}">
+                    <a href="#" class="back-button" id="backButton">
+                        <i class="fas fa-arrow-left"></i> Volver a Productos
+                    </a>
+                    <h2 class="section-title">${product.title}</h2>
+                    
+                    <div class="detail-gallery">
+                        <div class="detail-main-image">
+                            <img src="${product.images[0]}" alt="${product.title}" loading="lazy">
+                        </div>
+                        <div class="detail-secondary-images">
+                            <div class="detail-secondary-image">
+                                <img src="${product.images[1]}" alt="${product.title}" loading="lazy">
+                            </div>
+                            <div class="detail-secondary-image">
+                                <img src="${product.images[2]}" alt="${product.title}" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-info">
+                        ${product.extendedDescription}
+                    </div>
+                    
+                    <div class="location-selector">
+                        <div class="select-group">
+                            <label for="province">Provincia:</label>
+                            <select id="province" onchange="updateMunicipalities()">
+                                <option value="">Selecciona una provincia</option>
+                            </select>
+                        </div>
+                        <div class="select-group">
+                            <label for="municipality">Municipio:</label>
+                            <select id="municipality" disabled>
+                                <option value="">Primero selecciona una provincia</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="shipping-status">
+                        <span class="unavailable"><i class="fas fa-info-circle"></i> Selecciona tu ubicación para verificar disponibilidad de envío</span>
+                    </div>
+                    
+                    ${specificContent}
+                    
+                    <div class="detail-price">
+                        Precio: $${product.price.toFixed(2)}
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-disabled" disabled>
+                            <i class="fas fa-cart-plus"></i> Añadir al carrito
+                        </button>
+                        <a href="#" class="btn btn-view btn-disabled" onclick="return false;">
+                            <i class="fas fa-shopping-bag"></i> Comprar ahora
+                        </a>
+                        <button class="btn btn-chat" onclick="openTawkTo()">
+                            <i class="fas fa-comments"></i> Consultar sobre este producto
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Insertar en el contenedor
+            document.getElementById('product-detail-container').innerHTML = detailHTML;
+            
+            // Mostrar botón atrás fijo
+            showBackButton();
+            
+            // Inicializar selects de ubicación
+            initLocationSelectors();
+            
+            // Configurar eventos para inputs de banner
+            if (productId == 9) {
+                const widthInput = document.getElementById('banner-width');
+                const heightInput = document.getElementById('banner-height');
+                
+                if (widthInput && heightInput) {
+                    widthInput.addEventListener('input', calculateBannerPrice);
+                    heightInput.addEventListener('input', calculateBannerPrice);
+                }
+            }
+            
+            // Scroll preciso a la primera imagen
+            setTimeout(() => {
+                const firstImage = document.querySelector('.detail-main-image');
+                if (firstImage) {
+                    const imageTop = firstImage.offsetTop - 100;
+                    window.scrollTo({ top: imageTop, behavior: 'smooth' });
+                }
+            }, 300);
+            
+            // Configurar botón de volver
+            document.getElementById('backButton').addEventListener('click', function(e) {
+                e.preventDefault();
+                goBack();
+            });
+        }
+
+        // ===== FUNCIÓN PARA MOSTRAR DETALLE DE SERVICIO =====
+        function showServiceDetail(serviceId) {
+            const service = services[serviceId];
+            if (!service) return;
+            
+            // Ocultar secciones principales
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Crear HTML del detalle
+            const detailHTML = `
+                <div class="detail-page active" data-service-id="${serviceId}">
+                    <a href="#" class="back-button" id="backButton">
+                        <i class="fas fa-arrow-left"></i> Volver a Servicios
+                    </a>
+                    <h2 class="section-title">${service.title}</h2>
+                    
+                    <div class="detail-gallery">
+                        <div class="detail-main-image">
+                            <img src="${service.images[0]}" alt="${service.title}" loading="lazy">
+                        </div>
+                        <div class="detail-secondary-images">
+                            <div class="detail-secondary-image">
+                                <img src="${service.images[1]}" alt="${service.title}" loading="lazy">
+                            </div>
+                            <div class="detail-secondary-image">
+                                <img src="${service.images[2]}" alt="${service.title}" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-info">
+                        ${service.extendedDescription}
+                    </div>
+                    
+                    <div class="detail-price">
+                        Precio: $${service.price.toFixed(2)}
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn" onclick="addToCart('service', ${serviceId})">
+                            <i class="fas fa-cart-plus"></i> Añadir al carrito
+                        </button>
+                        <a href="${service.paypalLink}" class="btn btn-view" target="_blank">
+                            <i class="fas fa-shopping-bag"></i> Comprar ahora
+                        </a>
+                        <button class="btn btn-chat" onclick="openTawkTo()">
+                            <i class="fas fa-comments"></i> Consultar sobre este servicio
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Insertar en el contenedor
+            document.getElementById('service-detail-container').innerHTML = detailHTML;
+            
+            // Mostrar botón atrás fijo
+            showBackButton();
+            
+            // Scroll preciso a la primera imagen
+            setTimeout(() => {
+                const firstImage = document.querySelector('.detail-main-image');
+                if (firstImage) {
+                    const imageTop = firstImage.offsetTop - 100;
+                    window.scrollTo({ top: imageTop, behavior: 'smooth' });
+                }
+            }, 300);
+            
+            // Configurar botón de volver
+            document.getElementById('backButton').addEventListener('click', function(e) {
+                e.preventDefault();
+                goBack();
+            });
+        }
+
+        // ===== FUNCIÓN PARA INICIALIZAR SELECTORES DE UBICACIÓN =====
+        function initLocationSelectors() {
+            const provinceSelect = document.getElementById('province');
+            const municipalitySelect = document.getElementById('municipality');
+            
+            if (provinceSelect) {
+                provinceSelect.innerHTML = '<option value="">Selecciona una provincia</option>';
+                
+                for (const province in cubaLocations) {
+                    const option = document.createElement('option');
+                    option.value = province;
+                    option.textContent = province;
+                    option.selected = (province === "Granma");
+                    provinceSelect.appendChild(option);
+                }
+                
+                updateMunicipalities();
+                
+                if (municipalitySelect) {
+                    setTimeout(() => {
+                        municipalitySelect.value = "Bayamo";
+                        updateShippingStatus();
+                    }, 100);
+                }
+                
+                provinceSelect.addEventListener('change', function() {
+                    updateMunicipalities();
+                    setTimeout(updateShippingStatus, 50);
+                });
+                
+                if (municipalitySelect) {
+                    municipalitySelect.addEventListener('change', function() {
+                        setTimeout(updateShippingStatus, 50);
+                    });
+                }
+            }
+        }
+
+        // ===== FUNCIÓN PARA ACTUALIZAR MUNICIPIOS SEGÚN PROVINCIA SELECCIONADA =====
+        function updateMunicipalities() {
+            const provinceSelect = document.getElementById('province');
+            const municipalitySelect = document.getElementById('municipality');
+            
+            if (!provinceSelect || !municipalitySelect) return;
+            
+            const selectedProvince = provinceSelect.value;
+            
+            if (selectedProvince) {
+                municipalitySelect.innerHTML = '<option value="">Selecciona un municipio</option>';
+                
+                cubaLocations[selectedProvince].forEach(municipality => {
+                    const option = document.createElement('option');
+                    option.value = municipality;
+                    option.textContent = municipality;
+                    municipalitySelect.appendChild(option);
+                });
+                
+                municipalitySelect.disabled = false;
+            } else {
+                municipalitySelect.innerHTML = '<option value="">Primero selecciona una provincia</option>';
+                municipalitySelect.disabled = true;
+            }
+        }
+
+        // ===== FUNCIONES PARA ABRIR Y CERRAR MODALES =====
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // ===== FUNCIÓN PARA AÑADIR PRODUCTOS/SERVICIOS AL CARRITO =====
+        function addToCart(type, id) {
+            let itemData;
+            if (type === 'service') {
+                itemData = services[id];
+            } else {
+                itemData = products[id];
+            }
+            
+            if (!itemData) {
+                alert('Error: Producto no encontrado');
+                return;
+            }
+            
+            // Determinar precio según el tipo de producto
+            let price;
+            let title = itemData.title;
+            
+            if (type === 'product') {
+                if (id == 8 && selectedMeasurement) { // Cuadros personalizados
+                    price = selectedMeasurement.price;
+                    title += ` - ${selectedMeasurement.size}`;
+                } else if (id == 9 && bannerPrice > 0) { // Banner en lona
+                    price = bannerPrice;
+                    title += ` - ${document.getElementById('banner-width')?.value || 0}m x ${document.getElementById('banner-height')?.value || 0}m`;
+                } else {
+                    price = getItemPrice(type, id);
+                }
+            } else {
+                price = getItemPrice(type, id);
+            }
+            
+            const item = {
+                type: type,
+                id: id,
+                title: title,
+                price: price,
+                quantity: 1
+            };
+            
+            // Validar productos físicos
+            if (type === 'product') {
+                const provinceSelect = document.getElementById('province');
+                const municipalitySelect = document.getElementById('municipality');
+                
+                if (provinceSelect && municipalitySelect) {
+                    const province = provinceSelect.value;
+                    const municipality = municipalitySelect.value;
+                    
+                    if (province && municipality) {
+                        const isAvailable = checkShippingAvailability(province, municipality);
+                        item.shippingAvailable = isAvailable;
+                        
+                        if (!isAvailable) {
+                            alert('Nota: El envío no está disponible para tu ubicación. Puedes contactarnos para alternativas.');
+                        }
+                    }
+                }
+            }
+            
+            const existingItemIndex = cart.findIndex(cartItem => 
+                cartItem.id === item.id && cartItem.type === item.type && cartItem.title === item.title
+            );
+            
+            if (existingItemIndex !== -1) {
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                cart.push(item);
+            }
+            
+            updateCartCount();
+            alert(`¡${item.title} añadido al carrito!`);
+        }
+
+        // ===== FUNCIÓN PARA ACTUALIZAR CONTADOR DEL CARRITO =====
+        function updateCartCount() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+        }
+
+        // ===== FUNCIÓN PARA ACTUALIZAR VISUALIZACIÓN DEL CARRITO =====
+        function updateCartDisplay() {
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="empty-cart-message">Tu carrito está vacío</p>';
+                cartTotal.textContent = 'Total: $0.00';
+                return;
+            }
+            
+            let itemsHTML = '';
+            let total = 0;
+            
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                itemsHTML += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${item.title}</div>
+                            <div class="cart-item-price">$${item.price.toFixed(2)} c/u</div>
+                            <div class="cart-item-quantity">
+                                <button class="quantity-btn" onclick="decreaseQuantity(${index})">-</button>
+                                <span class="quantity-value">${item.quantity}</span>
+                                <button class="quantity-btn" onclick="increaseQuantity(${index})">+</button>
+                            </div>
+                        </div>
+                        <button class="cart-item-remove" onclick="removeFromCart(${index})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            
+            cartItems.innerHTML = itemsHTML;
+            cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+        }
+
+        // ===== FUNCIONES PARA MANEJAR CANTIDADES EN EL CARRITO =====
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartCount();
+            updateCartDisplay();
+        }
+
+        function increaseQuantity(index) {
+            cart[index].quantity += 1;
+            updateCartCount();
+            updateCartDisplay();
+        }
+
+        function decreaseQuantity(index) {
+            if (cart[index].quantity > 1) {
+                cart[index].quantity -= 1;
+            } else {
+                removeFromCart(index);
+                return;
+            }
+            updateCartCount();
+            updateCartDisplay();
+        }
+
+        // ===== FUNCIÓN PARA ENVIAR FORMULARIO DE CONTACTO =====
+        function sendContactEmail(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            if (!name || !email || !message) {
+                alert('Por favor, completa todos los campos del formulario.');
+                return;
+            }
+            
+            const templateParams = {
+                from_name: name,
+                from_email: email,
+                message: message,
+                to_email: "tu-email@ejemplo.com"
+            };
+            
+            emailjs.send('service_ffl454o', 'template_5uygsc1', templateParams)
+                .then(function(response) {
+                    alert('¡Mensaje enviado con éxito! Te contactaremos pronto.');
+                    document.getElementById('name').value = '';
+                    document.getElementById('email').value = '';
+                    document.getElementById('message').value = '';
+                }, function(error) {
+                    alert('Error al enviar el mensaje. Por favor, intenta nuevamente o usa el chat directo.');
+                    console.error('EmailJS Error:', error);
+                });
+        }
+    </script>
+</body>
+</html>
