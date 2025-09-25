@@ -1749,16 +1749,6 @@ s0.parentNode.insertBefore(s1,s0);
             colorSchemeQuery.addEventListener('change', updateLogoForTheme);
         }
 
-        // ===== CONFIGURACIÓN DE ENDPOINTS PIPEDREAM PARA PAYPAL =====
-        const PIPEDREAM_ENDPOINTS = [
-            "https://eo675v7qp45lubk.m.pipedream.net",
-            "https://eo675v7qp45lubk.m.pipedream.net/api",
-            "https://eo675v7qp45lubk.m.pipedream.net/api/webhook"
-        ];
-        
-        let currentEndpointIndex = 0;
-        const WEB_APP_URL = PIPEDREAM_ENDPOINTS[currentEndpointIndex];
-
         // ===== TABLA DE PRECIOS QUE COINCIDE CON PIPEDREAM =====
         const priceTable = {
             // Servicios (IDs 1-5)
@@ -1774,37 +1764,6 @@ s0.parentNode.insertBefore(s1,s0);
         function getItemPrice(itemType, itemId) {
             const key = (itemType === 'service' ? 'S' : 'P') + itemId;
             return priceTable[key] || 0;
-        }
-
-        // ===== FUNCIÓN PARA PROBAR CONEXIÓN CON ENDPOINTS PIPEDREAM =====
-        async function testEndpoint(endpointUrl) {
-            try {
-                const response = await fetch(endpointUrl, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-                console.log('Test endpoint status for', endpointUrl, ':', response.status);
-                return response.ok;
-            } catch (error) {
-                console.error('Error testing endpoint', endpointUrl, ':', error);
-                return false;
-            }
-        }
-
-        // ===== FUNCIÓN PARA ENCONTRAR ENDPOINT FUNCIONAL =====
-        async function findWorkingEndpoint() {
-            for (let i = 0; i < PIPEDREAM_ENDPOINTS.length; i++) {
-                const endpoint = PIPEDREAM_ENDPOINTS[i];
-                const isWorking = await testEndpoint(endpoint);
-                if (isWorking) {
-                    console.log('Endpoint funcional encontrado:', endpoint);
-                    currentEndpointIndex = i;
-                    return endpoint;
-                }
-            }
-            throw new Error('No se pudo encontrar un endpoint funcional');
         }
 
         // ===== DATOS DE PROVINCIAS Y MUNICIPIOS DE CUBA =====
@@ -2032,51 +1991,43 @@ shippingAvailable: true
                     currency: "USD"
                 };
                 
-                console.log("Enviando datos:", payload);
+                console.log("Enviando datos a Pipedream (CREACIÓN DE ORDEN):", payload);
                 
                 // Validar total
                 if (payload.total <= 0) {
                     throw new Error('El total debe ser mayor a 0');
                 }
                 
-                // Buscar endpoint funcional
-                const workingEndpoint = await findWorkingEndpoint();
-                console.log('Usando endpoint:', workingEndpoint);
+                // ✅ USAR ENDPOINT PRINCIPAL DIRECTAMENTE - CREACIÓN DE ORDEN
+                const endpoint = "https://eo675v7qp45lubk.m.pipedream.net";
+                console.log('✅ Usando endpoint para creación de orden:', endpoint);
                 
-                // Enviar a Pipedream con timeout
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 segundos timeout
-                
-                const response = await fetch(workingEndpoint, {
+                const response = await fetch(endpoint, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(payload),
-                    signal: controller.signal
+                    body: JSON.stringify(payload)
                 });
-                
-                clearTimeout(timeoutId);
                 
                 console.log('Response status:', response.status);
                 
                 if (!response.ok) {
                     const errorText = await response.text();
-                    console.error('Error response:', errorText);
-                    
-                    if (response.status === 404) {
-                        // Rotar al siguiente endpoint
-                        currentEndpointIndex = (currentEndpointIndex + 1) % PIPEDREAM_ENDPOINTS.length;
-                        throw new Error(`Endpoint no encontrado (404). Probando siguiente opción...`);
-                    }
-                    
                     throw new Error(`Error del servidor: ${response.status} - ${errorText}`);
                 }
                 
                 const result = await response.json();
-                console.log('Success response:', result);
+                console.log('✅ Success response:', result);
                 
                 if (result.success && result.approvalUrl) {
+                    // Guardar datos temporalmente para la página de gracias
+                    localStorage.setItem('pendingOrder', JSON.stringify({
+                        items: payload.items,
+                        total: payload.total,
+                        timestamp: Date.now()
+                    }));
+                    
                     // Redirigir a PayPal
                     window.location.href = result.approvalUrl;
                 } else {
@@ -2088,15 +2039,7 @@ shippingAvailable: true
                 
                 let errorMessage = 'Error al procesar el pago. ';
                 
-                if (error.name === 'AbortError') {
-                    errorMessage += 'Tiempo de espera agotado. Verifica tu conexión a internet.';
-                } else if (error.message.includes('404')) {
-                    errorMessage += error.message;
-                    // Intentar automáticamente con el siguiente endpoint
-                    setTimeout(() => {
-                        checkoutPaypal.click();
-                    }, 1000);
-                } else if (error.message.includes('fetch') || error.message.includes('Network')) {
+                if (error.message.includes('fetch') || error.message.includes('Network')) {
                     errorMessage += 'Problema de conexión. Verifica tu internet.';
                 } else if (error.message.includes('CORS')) {
                     errorMessage += 'Error de seguridad del navegador. Intenta en otro navegador.';
@@ -2206,13 +2149,6 @@ shippingAvailable: true
             if (contactSubmit) {
                 contactSubmit.addEventListener('click', sendContactEmail);
             }
-            
-            // ===== PROBAR ENDPOINTS AL CARGAR LA PÁGINA =====
-            setTimeout(() => {
-                findWorkingEndpoint().catch(error => {
-                    console.warn('No se pudo encontrar endpoint funcional al iniciar:', error);
-                });
-            }, 2000);
         });
 
         // ===== FUNCIÓN PARA VERIFICAR DISPONIBILIDAD DE ENVÍO =====
