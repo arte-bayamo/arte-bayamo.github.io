@@ -1042,7 +1042,7 @@ s0.parentNode.insertBefore(s1,s0);
             }
         }
         
-        /* ===== DISEÑO RESPONSIVE PARA MÓVILES - CORREGIDO ===== */
+        /* ===== DISEÑO RESPONSIVE PARA MÓVILES - COMPLETAMENTE REDISEÑADO ===== */
         @media (max-width: 768px) {
             body {
                 padding-top: 60px;
@@ -1053,7 +1053,9 @@ s0.parentNode.insertBefore(s1,s0);
             }
             
             .header-content {
-                gap: 10px;
+                gap: 8px;
+                flex-wrap: nowrap;
+                justify-content: space-between;
             }
             
             .logo img {
@@ -1063,20 +1065,42 @@ s0.parentNode.insertBefore(s1,s0);
             .mini-gif {
                 width: 35px;
                 height: 35px;
+                flex-shrink: 0;
+            }
+            
+            /* NAVEGACIÓN MÓVIL MEJORADA */
+            nav {
+                flex: none;
+                order: 3;
             }
             
             nav ul {
-                gap: 3px;
+                gap: 2px;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding: 5px 0;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            nav ul::-webkit-scrollbar {
+                display: none;
+            }
+            
+            nav li {
+                flex-shrink: 0;
             }
             
             nav a {
                 padding: 6px 10px;
-                font-size: 0.8rem;
+                font-size: 0.75rem;
+                white-space: nowrap;
             }
             
             .cart-icon {
                 width: 32px;
                 height: 32px;
+                flex-shrink: 0;
+                order: 2;
             }
             
             .back-button-fixed {
@@ -1086,68 +1110,74 @@ s0.parentNode.insertBefore(s1,s0);
                 font-size: 0.9rem;
             }
             
-            /* Hero Banner Mobile - MÁS COMPACTO */
+            /* HERO BANNER MÓVIL COMPACTO */
             .hero-banner {
-                padding: 30px 0 15px; /* Reducido padding */
-                min-height: 200px; /* Mitad del alto original */
+                padding: 30px 0 20px;
+                min-height: 180px; /* Mucho más compacto */
                 margin-top: -60px;
             }
             
             .hero-content-wrapper {
-                grid-template-columns: 1fr; /* Una columna en móvil */
+                grid-template-columns: 1fr;
                 gap: 15px;
-                align-items: center;
+                text-align: center;
             }
             
             .hero-text-content {
                 padding: 15px;
-                text-align: center; /* Centrar texto en móvil */
+                order: 2; /* Texto primero en móvil */
+            }
+
+            .hero-gif-content {
+                order: 1; /* GIF después en móvil */
             }
 
             .hero-title {
-                font-size: 1.4rem; /* Tamaño adecuado para móvil */
+                font-size: 1.3rem;
                 margin-bottom: 8px;
                 line-height: 1.2;
             }
 
             .hero-subtitle {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
                 line-height: 1.3;
                 margin-bottom: 15px;
             }
 
             .main-gif {
-                animation: float-mobile 3s ease-in-out infinite;
+                max-width: 120px;
+                margin: 0 auto;
             }
 
             .main-gif img {
-                max-width: 80%; /* Imagen más pequeña en móvil */
-                max-height: 150px; /* Limitar altura máxima */
+                max-width: 100%;
+                height: auto;
+                max-height: 100px;
             }
             
             @keyframes float-mobile {
                 0% { transform: translateY(0px); }
-                50% { transform: translateY(-5px); }
+                50% { transform: translateY(-3px); }
                 100% { transform: translateY(0px); }
             }
             
             .section, .detail-page {
-                padding: 40px 0;
+                padding: 30px 0;
             }
             
             .section-title {
-                font-size: 1.7rem;
-                margin-bottom: 30px;
+                font-size: 1.5rem;
+                margin-bottom: 25px;
             }
             
             /* Grid Mobile Mejorado */
             .services-grid, .products-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                grid-template-columns: 1fr;
                 gap: 15px;
             }
             
             .card-image {
-                height: 150px;
+                height: 140px;
             }
             
             .card-content {
@@ -1163,7 +1193,7 @@ s0.parentNode.insertBefore(s1,s0);
                 font-size: 0.85rem;
             }
             
-            /* Galería Mobile Igual que PC */
+            /* Galería Mobile */
             .detail-secondary-images {
                 grid-template-columns: 1fr 1fr;
             }
@@ -1178,7 +1208,8 @@ s0.parentNode.insertBefore(s1,s0);
             }
             
             .modal-content {
-                width: 85%;
+                width: 95%;
+                margin: 10px;
             }
             
             .terms-container {
@@ -1186,35 +1217,53 @@ s0.parentNode.insertBefore(s1,s0);
             }
             
             .terms-content {
-                padding: 20px;
+                padding: 15px;
             }
         }
         
         @media (max-width: 480px) {
             .header-content {
-                flex-wrap: nowrap;
+                gap: 5px;
             }
             
-            nav ul {
-                gap: 2px;
+            .logo img {
+                height: 30px;
+            }
+            
+            .mini-gif {
+                width: 30px;
+                height: 30px;
             }
             
             nav a {
                 padding: 5px 8px;
-                font-size: 0.75rem;
+                font-size: 0.7rem;
+            }
+            
+            .cart-icon {
+                width: 30px;
+                height: 30px;
             }
             
             .hero-banner {
-                padding: 25px 0 10px; /* Aún más compacto */
-                min-height: 180px; /* Altura mínima reducida */
+                padding: 20px 0 15px;
+                min-height: 150px;
             }
             
             .hero-title {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
             }
             
             .hero-subtitle {
                 font-size: 0.8rem;
+            }
+            
+            .main-gif {
+                max-width: 100px;
+            }
+            
+            .main-gif img {
+                max-height: 80px;
             }
             
             .services-grid, .products-grid {
@@ -1764,7 +1813,6 @@ s0.parentNode.insertBefore(s1,s0);
         ];
         
         let currentEndpointIndex = 0;
-        const WEB_APP_URL = PIPEDREAM_ENDPOINTS[currentEndpointIndex];
 
         // ===== TABLA DE PRECIOS QUE COINCIDE CON PIPEDREAM =====
         const priceTable = {
@@ -1783,200 +1831,6 @@ s0.parentNode.insertBefore(s1,s0);
             return priceTable[key] || 0;
         }
 
-        // ===== FUNCIÓN PARA PROBAR CONEXIÓN CON ENDPOINTS PIPEDREAM =====
-        async function testEndpoint(endpointUrl) {
-            try {
-                const response = await fetch(endpointUrl, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-                console.log('Test endpoint status for', endpointUrl, ':', response.status);
-                return response.ok;
-            } catch (error) {
-                console.error('Error testing endpoint', endpointUrl, ':', error);
-                return false;
-            }
-        }
-
-        // ===== FUNCIÓN PARA ENCONTRAR ENDPOINT FUNCIONAL =====
-        async function findWorkingEndpoint() {
-            for (let i = 0; i < PIPEDREAM_ENDPOINTS.length; i++) {
-                const endpoint = PIPEDREAM_ENDPOINTS[i];
-                const isWorking = await testEndpoint(endpoint);
-                if (isWorking) {
-                    console.log('Endpoint funcional encontrado:', endpoint);
-                    currentEndpointIndex = i;
-                    return endpoint;
-                }
-            }
-            throw new Error('No se pudo encontrar un endpoint funcional');
-        }
-
-        // ===== DATOS DE PROVINCIAS Y MUNICIPIOS DE CUBA =====
-        const cubaLocations = {
-            "Pinar del Río": ["Consolación del Sur", "Guane", "La Palma", "Los Palacios", "Mantua", "Minas de Matahambre", "Pinar del Río", "San Juan y Martínez", "San Luis", "Sandino", "Viñales"],
-            "Artemisa": ["Alquízar", "Artemisa", "Bauta", "Caimito", "Guanajay", "Güira de Melena", "Mariel", "San Antonio de los Baños", "Bahía Honda", "Candelaria", "San Cristóbal"],
-            "La Habana": ["Arroyo Naranjo", "Boyeros", "Centro Habana", "Cerro", "Cotorro", "Diez de Octubre", "Guanabacoa", "La Habana del Este", "La Habana Vieja", "La Lisa", "Marianao", "Playa", "Plaza de la Revolución", "Regla", "San Miguel del Padrón"],
-            "Mayabeque": ["Batabanó", "Bejucal", "Güines", "Jaruco", "Madruga", "Melena del Sur", "Nueva Paz", "Quivicán", "San José de las Lajas", "Santa Cruz del Norte"],
-            "Matanzas": ["Calimete", "Cárdenas", "Ciénaga de Zapata", "Colón", "Jagüey Grande", "Jovellanos", "Limonar", "Los Arabos", "Martí", "Matanzas", "Pedro Betancourt", "Perico", "Unión de Reyes"],
-            "Villa Clara": ["Caibarién", "Camajuaní", "Cifuentes", "Corralillo", "Encrucijada", "Manicaragua", "Placetas", "Quemado de Güines", "Remedios", "Sagua la Grande", "Santa Clara", "Santo Domingo"],
-            "Cienfuegos": ["Abreus", "Aguada de Pasajeros", "Cienfuegos", "Cruces", "Cumanayagua", "Palmira", "Rodas", "Santa Isabel de las Lajas"],
-            "Sancti Spíritus": ["Cabaiguán", "Fomento", "Jatibonico", "La Sierpe", "Sancti Spíritus", "Taguasco", "Trinidad", "Yaguajay"],
-            "Ciego de Ávila": ["Baraguá", "Bolivia", "Chambas", "Ciego de Ávila", "Ciro Redondo", "Florencia", "Majagua", "Morón", "Primero de Enero", "Venezuela"],
-            "Camagüey": ["Camagüey", "Carlos M. de Céspedes", "Esmeralda", "Florida", "Guáimaro", "Jimaguayú", "Minas", "Najasa", "Nuevitas", "Sibanicú", "Sierra de Cubitas", "Vertientes"],
-            "Las Tunas": ["Amancio", "Colombia", "Jesús Menéndez", "Jobabo", "Las Tunas", "Majibacoa", "Manatí", "Puerto Padre"],
-            "Granma": ["Bartolomé Masó", "Bayamo", "Buey Arriba", "Campechuela", "Cauto Cristo", "Guisa", "Jiguaní", "Manzanillo", "Media Luna", "Niquero", "Pilón", "Río Cauto", "Yara"],
-            "Holguín": ["Antilla", "Báguanos", "Banes", "Cacocum", "Calixto García", "Cueto", "Frank País", "Gibara", "Holguín", "Mayarí", "Moa", "Rafael Freyre", "Sagua de Tánamo", "Urbano Noris"],
-            "Santiago de Cuba": ["Contramaestre", "Guamá", "Mella", "Palma Soriano", "San Luis", "Santiago de Cuba", "Segundo Frente", "Songo-La Maya", "Tercer Frente"],
-            "Guantánamo": ["Baracoa", "Caimanera", "El Salvador", "Guantánamo", "Imías", "Maisí", "Manuel Tames", "Niceto Pérez", "San Antonio del Sur", "Yateras"]
-        };
-
-        // ===== DATOS DE SERVICIOS CON DESCRIPCIONES EXTENDIDAS =====
-        const services = {
-            1: {
-                title: "Restauración de fotos antiguas y deterioradas",
-                description: "Recuperamos fotos antiguas dañadas, eliminando manchas y arrugas, para preservar tus recuerdos con calidad profesional.",
-                extendedDescription: "<p>Nuestro servicio de restauración fotográfica devuelve la vida a tus recuerdos más preciados. Utilizamos tecnología avanzada y técnicas profesionales para:</p><ul><li>Eliminar manchas, rasgaduras y arrugas</li><li>Corregir decoloración y desvanecimiento</li><li>Reparar esquinas dañadas y bordes faltantes</li><li>Mejorar la claridad y el enfoque</li><li>Ajustar iluminación y contraste</li></ul><p>Ideal para fotografías familiares históricas, retratos y imágenes con valor sentimental.</p>",
-                price: 15,
-                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
-                images: ["restauracion-foto1.jpg", "restauracion-foto2.jpg", "restauracion-foto3.jpg"]
-            },
-            2: {
-                title: "Restauración de documentos antiguos",
-                description: "Recuperamos documentos importantes, manteniendo su aspecto original y legibilidad.",
-                extendedDescription: "<p>Preserva documentos históricos o importantes con nuestro servicio especializado de restauración. Nuestro proceso incluye:</p><ul><li>Limpieza profunda sin dañar el papel</li><li>Reparación de rasgaduras y perforaciones</li><li>Refuerzo de áreas debilitadas</li><li>Estabilización de tinta và pigmentos</li><li>Digitalización para preservación adicional</li></ul><p>Perfecto para certificados, mapas, cartas históricas y documentos legales importantes.</p>",
-                price: 10,
-                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
-                images: ["restauracion-doc1.jpg", "restauracion-doc2.jpg", "restauracion-doc3.jpg"]
-            },
-            3: {
-                title: "Diseño gráfico profesional",
-                description: "Diseños modernos y personalizados para tus proyectos, portafolios y promociones de productos.",
-                extendedDescription: "<p>Ofrecemos soluciones de diseño gráfico creativas y profesionales para todas tus necesidades:</p><ul><li>Logotipos e identidad corporativa</li><li>Material promocional (folletos, flyers, banners)</li><li>Diseño para redes sociales</li><li>Presentaciones profesionales</li><li>Portadas de libros y revistas</li><li>Ilustraciones personalizadas</li></ul><p>Trabajamos contigo para crear diseños que comuniquen efectivamente tu mensaje y destaquen tu marca.</p>",
-                price: 30,
-                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
-                images: ["diseno1.jpg", "diseno2.jpg", "diseno3.jpg"]
-            },
-            4: {
-                title: "Mockups y promociones para redes sociales",
-                description: "Presenta tus productos de manera profesional con mockups y diseños digitales listos para marketing.",
-                extendedDescription: "<p>Creamos presentaciones visuales atractivas para mostrar tus productos o servicios de la mejor manera:</p><ul><li>Mockups realistas de productos</li><li>Diseños optimizados para Instagram, Facebook y otras plataformas</li><li>Plantillas personalizables para marketing continuo</li><li>Banners y gráficos para tiendas online</li><li>Imágenes para catálogos y folletos digitales</li></ul><p>Ideal para emprendedores, pequeñas empresas y creadores de contenido que buscan destacar en el competitivo mundo digital.</p>",
-                price: 10,
-                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
-                images: ["mockup1.jpg", "mockup2.jpg", "mockup3.jpg"]
-            },
-            5: {
-                title: "Corrección profesional de imágenes generadas por IA",
-                description: "Mejoramos y corregimos imágenes generadas por IA, ajustando colores, detalles y proporciones para obtener resultados realistas.",
-                extendedDescription: "<p>Las imágenes generadas por IA a menudo necesitan ajustes para alcanzar un aspecto profesional y realista. Nuestro servicio incluye:</p><ul><li>Corrección de proporciones anatómicas</li><li>Ajuste de colores y iluminación</li><li>Mejora de detalles y texturas</li><li>Corrección de artefactos y errores visuales</li><li>Integración de elementos realistas</li><li>Optimización para diferentes usos (impresión, web, etc.)</li></ul><p>Transformamos tus creaciones de IA en imágenes listas para uso profesional.</p>",
-                price: 10,
-                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
-                images: ["ia1.jpg", "ia2.jpg", "ia3.jpg"]
-            }
-        };
-
-        // ===== DATOS DE PRODUCTOS CON DESCRIPCIONES EXTENDIDAS =====
-        const products = {
-            1: {
-                title: "Tazas personalizadas",
-                description: "¡Sorprende a tu ser querido con un detalle único! La taza personalizada es nuestro producto estrella.",
-                extendedDescription: "<p>Nuestras tazas personalizadas son el regalo perfecto para cualquier ocasión. Características:</p><ul><li>Material: Cerámica de alta calidad</li><li>Capacidad: 325ml</li><li>Diseño personalizado a todo color</li><li>Resistente al microondas y lavavajillas</li><li>Impresión duradera que no se desgasta</li></ul><p>Puedes personalizarla con fotos, nombres, mensajes especiales o diseños únicos. ¡Haz que cada mañana sea especial con una taza que realmente representa a quien la usa!</p>",
-                price: 12,
-                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
-                images: ["taza1.jpg", "taza2.jpg", "taza3.jpg"],
-                shippingAvailable: true
-            },
-            2: {
-               title: "Llaveros Personalizados en PVC Sublimable",
-description: "Un detalle práctico y duradero para enviar a tus seres queridos en Cuba.",
-extendedDescription: "<p><strong>Llaveros Personalizados en PVC Sublimable</strong><br>Un detalle práctico y duradero para enviar a tus seres queridos en Cuba.</p><ul><li>Material: PVC sublimable de alta calidad</li><li>Tamaños: variados (ejemplo: redondo de 3.8 cm de diámetro)</li><li>Impresión full color por ambas caras</li><li>Anillo metálico resistente</li><li>Acabado suave y profesional</li></ul><p>Perfectos para regalar a familiares y amigos en Cuba, ya sea como recuerdo especial, detalle de cariño o presente único. Personalízalos con fotos, mensajes o logos y sorprende a los tuyos con un regalo que conecta a la distancia.</p>",
-price: 6,
-paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
-images: ["llavero1.jpg", "llavero2.jpg", "llavero3.jpg"],
-shippingAvailable: true
-},
-
-           3: {
-    title: "Reloj de escritorio personalizado",
-    description: "Funcionalidad y estilo en un detalle único para enviar a tus seres queridos en Cuba.",
-    extendedDescription: "<p><strong>Relojes de Escritorio Personalizados</strong><br>Funcionalidad y estilo en un detalle único para enviar a tus seres queridos en Cuba.</p><ul><li>Base cuadrada de 10.4 x 10.4 cm con bordes redondeados</li><li>Material: madera o PVC sublimable de 3 mm de grosor</li><li>Mecanismo quartz preciso y silencioso</li><li>Diseño personalizado en la esfera</li><li>Funciona con pila AA (incluida)</li></ul><p>Perfecto para oficinas, escritorios en casa o como regalo especial. Personalízalo con fotos, logos o diseños que hagan único tu regalo y sorprende a familiares y amigos en Cuba con un detalle que combina utilidad y cariño.</p>",
-    price: 15,
-    paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
-    images: ["reloj1.jpg", "reloj2.jpg", "reloj3.jpg"],
-    shippingAvailable: true
-},
-
-        4: {
-    title: "Agendas personalizadas hechas a mano",
-    description: "Agendas únicas y funcionales para sorprender a tus seres queridos en Cuba.",
-    extendedDescription: "<p><strong>Agendas Personalizadas Hechas a Mano – Organización y Estilo</strong><br>Agendas únicas, hechas a mano, cocidas y pegadas con materiales de alta calidad, diseñadas para mantener la vida organizada y sorprender a tus seres queridos en Cuba.</p><ul><li>Tamaño A5 (14.8 x 21 cm)</li><li>Portada dura forrada en vinil sintético de alta calidad, disponible en varios colores</li><li>Diseño de la página de portada personalizado con fotos o diseños que el cliente desee (diseño gratis incluido)</li><li>120 páginas de papel de alta calidad</li><li>Sección para datos personales, información de interés y números telefónicos importantes, incluyendo códigos de países</li><li>Calendario anual de 3 años y calendario perpetuo</li><li>Mapa del mundo al final de la agenda</li><li>Espacio para notas y contactos</li><li>Diseño interior práctico con calendario anual, mensual y semanal</li><li>Cierre elástico para mantener todo seguro</li></ul><p>Perfecta para profesionales, estudiantes o cualquier persona que valore la organización con estilo. Envía un regalo único y funcional que combina utilidad, diseño personalizado y cariño a familiares o amigos en Cuba.</p>",
-    price: 20,
-    paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
-    images: ["agenda1.jpg", "agenda2.jpg", "agenda3.jpg"],
-    shippingAvailable: true
-},
-
-            5: {
-                title: "Impresión de fotos en papel fotográfico A4",
-                description: "Recuerda tus mejores momentos con impresiones de alta calidad.",
-                extendedDescription: "<p>Preserva tus recuerdos con impresiones fotográficas de alta calidad. Características:</p><ul><li>Tamaño A4 (21 x 29.7 cm)</li><li>Papel fotográfico premium de 180g</li><li>Impresión a color de alta resolución</li><li>Resistente a la decoloración (hasta 100 años)</li><li>Acabado brillo o mate (según preferencia)</li></ul><p>Perfecto para enmarcar, crear álbumes fotográficos, o decorar tus espacios con tus momentos especiales. Desde retratos familiares hasta paisajes impresionantes, cada impresión captura la esencia del momento.</p>",
-                price: 3,
-                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
-                images: ["fotoimpresa1.jpg", "fotoimpresa2.jpg", "fotoimpresa3.jpg"],
-                shippingAvailable: true
-            },
-          6: {
-    title: "Camisetas y Pullovers Personalizados",
-    description: "Expresa tu estilo y envía un regalo único a tus seres queridos en Cuba con prendas sublimadas o con vinilo textil.",
-    extendedDescription: "<p><strong>Prendas Personalizadas – Estilo y Originalidad</strong><br>Expresa tu estilo y envía un regalo único a tus seres queridos en Cuba con nuestras prendas sublimadas o con vinilo textil.</p><ul><li>Tejido 100 % poliéster blanco, ideal para sublimación</li><li>Pullovers de tejido suave y cálido, también sublimables</li><li>Talles desde S hasta XXL</li><li>Estampado de alta calidad que no se decolora ni se agrieta</li><li>Diseños personalizados o plantillas disponibles (diseño gratis incluido)</li><li>Perfecto para regalos, eventos familiares, equipos de trabajo o para expresar tu personalidad única</li></ul><p>Crea un regalo práctico, duradero y personalizado que sorprenderá a familiares o amigos en Cuba con un toque de estilo y cariño.</p>",
-    price: 12,
-    paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
-    images: ["camiseta1.jpg", "camiseta2.jpg", "camiseta3.jpg"],
-    shippingAvailable: true
-},
-
-            7: {
-                title: "Vinilos de corte para decoración",
-                description: "Decora tu hogar con frases motivadoras o diseños personalizados a tu gusto.",
-                extendedDescription: "<p>Transforma tus espacios con nuestros vinilos decorativos personalizados. Características:</p><ul><li>Vinilo de corte de alta calidad y durabilidad</li><li>Resistente al agua y a los rayos UV</li><li>Fácil aplicación y removible sin dañar superficies</li><li>Variedad de colores disponibles</li><li>Diseños personalizados según tus especificaciones</li></ul><p>Perfecto para decorar paredes, espejos, ventanas, laptops, o cualquier superficie lisa. Desde frases inspiradoras hasta diseños decorativos únicos, nuestros vinilos añaden personalidad a cualquier espacio.</p>",
-                price: 20,
-                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
-                images: ["vinilo1.jpg", "vinilo2.jpg", "vinilo3.jpg"],
-                shippingAvailable: true
-            },
-
-            // ===== NUEVO PRODUCTO 8 - CUADROS PERSONALIZADOS =====
-            8: {
-                title: "Cuadros personalizados",
-                description: "Decora tus espacios con hermosos cuadros personalizados, impresiones en vinilo y papel fotográfico de alta calidad.",
-                extendedDescription: "<p><strong>Cuadros Personalizados – Elegancia y Personalización</strong><br>Transforma tus espacios con cuadros personalizados de alta calidad que capturan tus momentos más especiales. Ofrecemos diferentes formatos y materiales para adaptarnos a tus necesidades.</p><ul><li>Impresión en vinilo de alta resolución para interiores</li><li>Papel fotográfico premium resistente a la decoloración</li><li>Marcos de madera de diferentes estilos y colores</li><li>Protección UV para mayor durabilidad</li><li>Acabado profesional listo para colgar</li></ul><p>Ideal para decorar hogares, oficinas, o como regalo especial para familiares y amigos. Captura tus recuerdos más preciados y dales un lugar especial en tu espacio.</p>",
-                price: 15, // Precio base - se actualiza según medida seleccionada
-                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
-                images: ["cuadro1.jpg", "cuadro2.jpg", "cuadro3.jpg"],
-                shippingAvailable: true,
-                measurements: [
-                    { size: "8x12 pulgadas", price: 15, dimensions: "20x30 cm" },
-                    { size: "12x18 pulgadas", price: 25, dimensions: "30x45 cm" },
-                    { size: "16x24 pulgadas", price: 35, dimensions: "40x60 cm" },
-                    { size: "20x30 pulgadas", price: 45, dimensions: "50x75 cm" }
-                ]
-            },
-
-            // ===== NUEVO PRODUCTO 9 - BANNER EN LONA =====
-            9: {
-                title: "Banner en lona",
-                description: "Impresión de banners en lona de alta calidad, perfectos para eventos, negocios y promociones.",
-                extendedDescription: "<p><strong>Banners en Lona – Impacto Visual Profesional</strong><br>Creamos banners publicitarios y decorativos en lona de alta calidad, ideales para eventos, negocios, ferias y promociones especiales.</p><ul><li>Lona publicitaria de alta resistencia</li><li>Impresión a todo color de alta resolución</li><li>Resistente a la intemperie y rayos UV</li><li>Ojales metálicos para fácil instalación</li><li>Acabado profesional con refuerzos en bordes</li><li>Ideal para uso interior y exterior</li></ul><p>Perfecto para promociones comerciales, eventos especiales, señalización o cualquier ocasión que requiera un impacto visual profesional y duradero.</p>",
-                price: 50, // Precio por m²
-                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
-                images: ["banner1.jpg", "banner2.jpg", "banner3.jpg"],
-                shippingAvailable: true,
-                pricePerSquareMeter: 50
-            }
-        };
-
         // ===== VARIABLES DEL CARRITO DE COMPRAS =====
         let cart = [];
         const cartIcon = document.getElementById('cartIcon');
@@ -1990,7 +1844,7 @@ shippingAvailable: true
         let selectedMeasurement = null;
         let bannerPrice = 0;
 
-        // ===== EVENT LISTENER PARA BOTÓN DE PAGO PAYPAL - VERSIÓN CORREGIDA =====
+        // ===== EVENT LISTENER PARA BOTÓN DE PAGO PAYPAL - VERSIÓN DEFINITIVA CORREGIDA =====
         checkoutPaypal.addEventListener('click', async function() {
             if (cart.length === 0) {
                 alert('Tu carrito está vacío');
@@ -2026,7 +1880,7 @@ shippingAvailable: true
                 checkoutPaypal.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
                 checkoutPaypal.disabled = true;
                 
-                // Preparar datos del carrito
+                // Preparar datos del carrito - ESTRUCTURA EXACTA
                 const payload = {
                     items: cart.map(item => ({
                         type: item.type,
@@ -2039,92 +1893,108 @@ shippingAvailable: true
                     currency: "USD"
                 };
                 
-                console.log("🛒 Datos del carrito enviados:", payload);
+                console.log("🛒 Datos enviados a Pipedream:", JSON.stringify(payload, null, 2));
                 
                 // Validar total
                 if (payload.total <= 0) {
                     throw new Error('El total debe ser mayor a 0');
                 }
                 
-                // Buscar endpoint funcional
-                const workingEndpoint = await findWorkingEndpoint();
-                console.log('🔗 Usando endpoint:', workingEndpoint);
+                // Usar el endpoint principal
+                const endpoint = "https://eo675v7qp45lubk.m.pipedream.net";
+                console.log('🔗 Endpoint:', endpoint);
                 
-                // Enviar a Pipedream con timeout más generoso
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 segundos timeout
-                
-                const response = await fetch(workingEndpoint, {
+                // Enviar a Pipedream
+                const response = await fetch(endpoint, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(payload),
-                    signal: controller.signal
+                    body: JSON.stringify(payload)
                 });
                 
-                clearTimeout(timeoutId);
+                console.log('📡 Status de respuesta:', response.status);
                 
-                console.log('📡 Response status:', response.status);
-                
+                // Verificar si la respuesta es OK
                 if (!response.ok) {
                     const errorText = await response.text();
-                    console.error('❌ Error response:', errorText);
+                    console.error('❌ Error del servidor:', {
+                        status: response.status,
+                        statusText: response.statusText,
+                        body: errorText
+                    });
                     
-                    if (response.status === 404) {
-                        // Rotar al siguiente endpoint
-                        currentEndpointIndex = (currentEndpointIndex + 1) % PIPEDREAM_ENDPOINTS.length;
-                        throw new Error(`Endpoint no encontrado (404). Probando siguiente opción...`);
+                    if (response.status === 400) {
+                        throw new Error('Error en el servidor (400). Por favor, contacta al soporte.');
                     }
                     
-                    throw new Error(`Error del servidor: ${response.status} - ${errorText}`);
+                    throw new Error(`Error del servidor: ${response.status} ${response.statusText}`);
                 }
                 
-                const result = await response.json();
-                console.log('✅ Success response:', result);
+                // Leer la respuesta como texto primero
+                const responseText = await response.text();
+                console.log('📄 Respuesta cruda:', responseText);
                 
-                // ✅ MANEJO CORREGIDO DE LA RESPUESTA
+                let result;
+                try {
+                    result = JSON.parse(responseText);
+                } catch (parseError) {
+                    console.error('❌ Error parseando JSON:', parseError);
+                    throw new Error('La respuesta del servidor no es válida: ' + responseText);
+                }
+                
+                console.log('✅ Respuesta parseada:', result);
+                
+                // ✅ VERIFICACIÓN CORREGIDA - MÚLTIPLES FORMATOS POSIBLES
                 if (result.success && result.approvalUrl) {
-                    console.log('🎯 Redirigiendo a PayPal:', result.approvalUrl);
-                    // Redirigir a PayPal
+                    // Formato principal: {success: true, approvalUrl: "..."}
+                    console.log('🎯 Redirigiendo a PayPal (formato 1):', result.approvalUrl);
                     window.location.href = result.approvalUrl;
-                } else {
-                    // Manejar diferentes formatos de respuesta
-                    if (result.links) {
-                        const approvalLink = result.links.find(link => link.rel === 'approve');
-                        if (approvalLink) {
-                            console.log('🎯 Redirigiendo a PayPal (formato alternativo):', approvalLink.href);
-                            window.location.href = approvalLink.href;
-                        } else {
-                            throw new Error('No se encontró el enlace de aprobación en la respuesta');
-                        }
+                    
+                } else if (result.links) {
+                    // Formato alternativo de PayPal: {links: [{rel: "approve", href: "..."}]}
+                    const approvalLink = result.links.find(link => link.rel === 'approve');
+                    if (approvalLink && approvalLink.href) {
+                        console.log('🎯 Redirigiendo a PayPal (formato 2):', approvalLink.href);
+                        window.location.href = approvalLink.href;
                     } else {
-                        throw new Error(result.error || 'Error al crear la orden de pago');
+                        throw new Error('No se encontró enlace de aprobación en la respuesta');
                     }
+                    
+                } else if (result.id && result.status === 'CREATED') {
+                    // Formato directo de PayPal - construir URL manualmente
+                    const approvalUrl = `https://www.paypal.com/checkoutnow?token=${result.id}`;
+                    console.log('🎯 Redirigiendo a PayPal (formato 3):', approvalUrl);
+                    window.location.href = approvalUrl;
+                    
+                } else {
+                    console.error('❌ Formato de respuesta no reconocido:', result);
+                    throw new Error('Formato de respuesta inesperado del servidor');
                 }
                 
             } catch (error) {
-                console.error('❌ Error en el checkout:', error);
+                console.error('❌ Error en el proceso de pago:', error);
                 
-                let errorMessage = 'Error al procesar el pago. ';
+                let errorMessage = 'No se pudo completar el proceso de pago. ';
                 
-                if (error.name === 'AbortError') {
-                    errorMessage += 'Tiempo de espera agotado. Verifica tu conexión a internet.';
-                } else if (error.message.includes('404')) {
-                    errorMessage += error.message;
-                    // Intentar automáticamente con el siguiente endpoint
-                    setTimeout(() => {
-                        checkoutPaypal.click();
-                    }, 1000);
-                } else if (error.message.includes('fetch') || error.message.includes('Network')) {
-                    errorMessage += 'Problema de conexión. Verifica tu internet.';
-                } else if (error.message.includes('CORS')) {
-                    errorMessage += 'Error de seguridad del navegador. Intenta en otro navegador.';
+                if (error.message.includes('CORS') || error.message.includes('Network')) {
+                    errorMessage += 'Error de conexión. Verifica tu internet o intenta en otro navegador.';
+                } else if (error.message.includes('Failed to fetch')) {
+                    errorMessage += 'No se pudo conectar con el servidor. Verifica tu conexión.';
                 } else {
                     errorMessage += error.message;
                 }
                 
+                // Mostrar alerta con detalles del error
                 alert(errorMessage);
+                
+                // Ofrecer contacto con soporte
+                setTimeout(() => {
+                    const contactSupport = confirm('¿Deseas contactar al soporte técnico para ayuda?');
+                    if (contactSupport) {
+                        openTawkTo();
+                    }
+                }, 500);
                 
                 // Restaurar botón
                 checkoutPaypal.innerHTML = 'Pagar con PayPal';
@@ -2226,13 +2096,6 @@ shippingAvailable: true
             if (contactSubmit) {
                 contactSubmit.addEventListener('click', sendContactEmail);
             }
-            
-            // ===== PROBAR ENDPOINTS AL CARGAR LA PÁGINA =====
-            setTimeout(() => {
-                findWorkingEndpoint().catch(error => {
-                    console.warn('No se pudo encontrar endpoint funcional al iniciar:', error);
-                });
-            }, 2000);
         });
 
         // ===== FUNCIÓN PARA VERIFICAR DISPONIBILIDAD DE ENVÍO =====
@@ -2918,6 +2781,169 @@ shippingAvailable: true
                     console.error('EmailJS Error:', error);
                 });
         }
+
+        // ===== DATOS DE PROVINCIAS Y MUNICIPIOS DE CUBA =====
+        const cubaLocations = {
+            "Pinar del Río": ["Consolación del Sur", "Guane", "La Palma", "Los Palacios", "Mantua", "Minas de Matahambre", "Pinar del Río", "San Juan y Martínez", "San Luis", "Sandino", "Viñales"],
+            "Artemisa": ["Alquízar", "Artemisa", "Bauta", "Caimito", "Guanajay", "Güira de Melena", "Mariel", "San Antonio de los Baños", "Bahía Honda", "Candelaria", "San Cristóbal"],
+            "La Habana": ["Arroyo Naranjo", "Boyeros", "Centro Habana", "Cerro", "Cotorro", "Diez de Octubre", "Guanabacoa", "La Habana del Este", "La Habana Vieja", "La Lisa", "Marianao", "Playa", "Plaza de la Revolución", "Regla", "San Miguel del Padrón"],
+            "Mayabeque": ["Batabanó", "Bejucal", "Güines", "Jaruco", "Madruga", "Melena del Sur", "Nueva Paz", "Quivicán", "San José de las Lajas", "Santa Cruz del Norte"],
+            "Matanzas": ["Calimete", "Cárdenas", "Ciénaga de Zapata", "Colón", "Jagüey Grande", "Jovellanos", "Limonar", "Los Arabos", "Martí", "Matanzas", "Pedro Betancourt", "Perico", "Unión de Reyes"],
+            "Villa Clara": ["Caibarién", "Camajuaní", "Cifuentes", "Corralillo", "Encrucijada", "Manicaragua", "Placetas", "Quemado de Güines", "Remedios", "Sagua la Grande", "Santa Clara", "Santo Domingo"],
+            "Cienfuegos": ["Abreus", "Aguada de Pasajeros", "Cienfuegos", "Cruces", "Cumanayagua", "Palmira", "Rodas", "Santa Isabel de las Lajas"],
+            "Sancti Spíritus": ["Cabaiguán", "Fomento", "Jatibonico", "La Sierpe", "Sancti Spíritus", "Taguasco", "Trinidad", "Yaguajay"],
+            "Ciego de Ávila": ["Baraguá", "Bolivia", "Chambas", "Ciego de Ávila", "Ciro Redondo", "Florencia", "Majagua", "Morón", "Primero de Enero", "Venezuela"],
+            "Camagüey": ["Camagüey", "Carlos M. de Céspedes", "Esmeralda", "Florida", "Guáimaro", "Jimaguayú", "Minas", "Najasa", "Nuevitas", "Sibanicú", "Sierra de Cubitas", "Vertientes"],
+            "Las Tunas": ["Amancio", "Colombia", "Jesús Menéndez", "Jobabo", "Las Tunas", "Majibacoa", "Manatí", "Puerto Padre"],
+            "Granma": ["Bartolomé Masó", "Bayamo", "Buey Arriba", "Campechuela", "Cauto Cristo", "Guisa", "Jiguaní", "Manzanillo", "Media Luna", "Niquero", "Pilón", "Río Cauto", "Yara"],
+            "Holguín": ["Antilla", "Báguanos", "Banes", "Cacocum", "Calixto García", "Cueto", "Frank País", "Gibara", "Holguín", "Mayarí", "Moa", "Rafael Freyre", "Sagua de Tánamo", "Urbano Noris"],
+            "Santiago de Cuba": ["Contramaestre", "Guamá", "Mella", "Palma Soriano", "San Luis", "Santiago de Cuba", "Segundo Frente", "Songo-La Maya", "Tercer Frente"],
+            "Guantánamo": ["Baracoa", "Caimanera", "El Salvador", "Guantánamo", "Imías", "Maisí", "Manuel Tames", "Niceto Pérez", "San Antonio del Sur", "Yateras"]
+        };
+
+        // ===== DATOS DE SERVICIOS CON DESCRIPCIONES EXTENDIDAS =====
+        const services = {
+            1: {
+                title: "Restauración de fotos antiguas y deterioradas",
+                description: "Recuperamos fotos antiguas dañadas, eliminando manchas y arrugas, para preservar tus recuerdos con calidad profesional.",
+                extendedDescription: "<p>Nuestro servicio de restauración fotográfica devuelve la vida a tus recuerdos más preciados. Utilizamos tecnología avanzada y técnicas profesionales para:</p><ul><li>Eliminar manchas, rasgaduras y arrugas</li><li>Corregir decoloración y desvanecimiento</li><li>Reparar esquinas dañadas y bordes faltantes</li><li>Mejorar la claridad y el enfoque</li><li>Ajustar iluminación y contraste</li></ul><p>Ideal para fotografías familiares históricas, retratos y imágenes con valor sentimental.</p>",
+                price: 15,
+                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+                images: ["restauracion-foto1.jpg", "restauracion-foto2.jpg", "restauracion-foto3.jpg"]
+            },
+            2: {
+                title: "Restauración de documentos antiguos",
+                description: "Recuperamos documentos importantes, manteniendo su aspecto original y legibilidad.",
+                extendedDescription: "<p>Preserva documentos históricos o importantes con nuestro servicio especializado de restauración. Nuestro proceso incluye:</p><ul><li>Limpieza profunda sin dañar el papel</li><li>Reparación de rasgaduras y perforaciones</li><li>Refuerzo de áreas debilitadas</li><li>Estabilización de tinta và pigmentos</li><li>Digitalización para preservación adicional</li></ul><p>Perfecto para certificados, mapas, cartas históricas y documentos legales importantes.</p>",
+                price: 10,
+                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+                images: ["restauracion-doc1.jpg", "restauracion-doc2.jpg", "restauracion-doc3.jpg"]
+            },
+            3: {
+                title: "Diseño gráfico profesional",
+                description: "Diseños modernos y personalizados para tus proyectos, portafolios y promociones de productos.",
+                extendedDescription: "<p>Ofrecemos soluciones de diseño gráfico creativas y profesionales para todas tus necesidades:</p><ul><li>Logotipos e identidad corporativa</li><li>Material promocional (folletos, flyers, banners)</li><li>Diseño para redes sociales</li><li>Presentaciones profesionales</li><li>Portadas de libros y revistas</li><li>Ilustraciones personalizadas</li></ul><p>Trabajamos contigo para crear diseños que comuniquen efectivamente tu mensaje y destaquen tu marca.</p>",
+                price: 30,
+                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+                images: ["diseno1.jpg", "diseno2.jpg", "diseno3.jpg"]
+            },
+            4: {
+                title: "Mockups y promociones para redes sociales",
+                description: "Presenta tus productos de manera profesional con mockups y diseños digitales listos para marketing.",
+                extendedDescription: "<p>Creamos presentaciones visuales atractivas para mostrar tus productos o servicios de la mejor manera:</p><ul><li>Mockups realistas de productos</li><li>Diseños optimizados para Instagram, Facebook y otras plataformas</li><li>Plantillas personalizables para marketing continuo</li><li>Banners y gráficos para tiendas online</li><li>Imágenes para catálogos y folletos digitales</li></ul><p>Ideal para emprendedores, pequeñas empresas y creadores de contenido que buscan destacar en el competitivo mundo digital.</p>",
+                price: 10,
+                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+                images: ["mockup1.jpg", "mockup2.jpg", "mockup3.jpg"]
+            },
+            5: {
+                title: "Corrección profesional de imágenes generadas por IA",
+                description: "Mejoramos y corregimos imágenes generadas por IA, ajustando colores, detalles y proporciones para obtener resultados realistas.",
+                extendedDescription: "<p>Las imágenes generadas por IA a menudo necesitan ajustes para alcanzar un aspecto profesional y realista. Nuestro servicio incluye:</p><ul><li>Corrección de proporciones anatómicas</li><li>Ajuste de colores y iluminación</li><li>Mejora de detalles y texturas</li><li>Corrección de artefactos y errores visuales</li><li>Integración de elementos realistas</li><li>Optimización para diferentes usos (impresión, web, etc.)</li></ul><p>Transformamos tus creaciones de IA en imágenes listas para uso profesional.</p>",
+                price: 10,
+                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+                images: ["ia1.jpg", "ia2.jpg", "ia3.jpg"]
+            }
+        };
+
+        // ===== DATOS DE PRODUCTOS CON DESCRIPCIONES EXTENDIDAS =====
+        const products = {
+            1: {
+                title: "Tazas personalizadas",
+                description: "¡Sorprende a tu ser querido con un detalle único! La taza personalizada es nuestro producto estrella.",
+                extendedDescription: "<p>Nuestras tazas personalizadas son el regalo perfecto para cualquier ocasión. Características:</p><ul><li>Material: Cerámica de alta calidad</li><li>Capacidad: 325ml</li><li>Diseño personalizado a todo color</li><li>Resistente al microondas y lavavajillas</li><li>Impresión duradera que no se desgasta</li></ul><p>Puedes personalizarla con fotos, nombres, mensajes especiales o diseños únicos. ¡Haz que cada mañana sea especial con una taza que realmente representa a quien la usa!</p>",
+                price: 12,
+                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+                images: ["taza1.jpg", "taza2.jpg", "taza3.jpg"],
+                shippingAvailable: true
+            },
+            2: {
+               title: "Llaveros Personalizados en PVC Sublimable",
+description: "Un detalle práctico y duradero para enviar a tus seres queridos en Cuba.",
+extendedDescription: "<p><strong>Llaveros Personalizados en PVC Sublimable</strong><br>Un detalle práctico y duradero para enviar a tus seres queridos en Cuba.</p><ul><li>Material: PVC sublimable de alta calidad</li><li>Tamaños: variados (ejemplo: redondo de 3.8 cm de diámetro)</li><li>Impresión full color por ambas caras</li><li>Anillo metálico resistente</li><li>Acabado suave y profesional</li></ul><p>Perfectos para regalar a familiares y amigos en Cuba, ya sea como recuerdo especial, detalle de cariño o presente único. Personalízalos con fotos, mensajes o logos y sorprende a los tuyos con un regalo que conecta a la distancia.</p>",
+price: 6,
+paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+images: ["llavero1.jpg", "llavero2.jpg", "llavero3.jpg"],
+shippingAvailable: true
+},
+
+           3: {
+    title: "Reloj de escritorio personalizado",
+    description: "Funcionalidad y estilo en un detalle único para enviar a tus seres queridos en Cuba.",
+    extendedDescription: "<p><strong>Relojes de Escritorio Personalizados</strong><br>Funcionalidad y estilo en un detalle único para enviar a tus seres queridos en Cuba.</p><ul><li>Base cuadrada de 10.4 x 10.4 cm con bordes redondeados</li><li>Material: madera o PVC sublimable de 3 mm de grosor</li><li>Mecanismo quartz preciso y silencioso</li><li>Diseño personalizado en la esfera</li><li>Funciona con pila AA (incluida)</li></ul><p>Perfecto para oficinas, escritorios en casa o como regalo especial. Personalízalo con fotos, logos o diseños que hagan único tu regalo y sorprende a familiares y amigos en Cuba con un detalle que combina utilidad y cariño.</p>",
+    price: 15,
+    paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+    images: ["reloj1.jpg", "reloj2.jpg", "reloj3.jpg"],
+    shippingAvailable: true
+},
+
+        4: {
+    title: "Agendas personalizadas hechas a mano",
+    description: "Agendas únicas y funcionales para sorprender a tus seres queridos en Cuba.",
+    extendedDescription: "<p><strong>Agendas Personalizadas Hechas a Mano – Organización y Estilo</strong><br>Agendas únicas, hechas a mano, cocidas y pegadas con materiales de alta calidad, diseñadas para mantener la vida organizada y sorprender a tus seres queridos en Cuba.</p><ul><li>Tamaño A5 (14.8 x 21 cm)</li><li>Portada dura forrada en vinil sintético de alta calidad, disponible en varios colores</li><li>Diseño de la página de portada personalizado con fotos o diseños que el cliente desee (diseño gratis incluido)</li><li>120 páginas de papel de alta calidad</li><li>Sección para datos personales, información de interés y números telefónicos importantes, incluyendo códigos de países</li><li>Calendario anual de 3 años y calendario perpetuo</li><li>Mapa del mundo al final de la agenda</li><li>Espacio para notas y contactos</li><li>Diseño interior práctico con calendario anual, mensual y semanal</li><li>Cierre elástico para mantener todo seguro</li></ul><p>Perfecta para profesionales, estudiantes o cualquier persona que valore la organización con estilo. Envía un regalo único y funcional que combina utilidad, diseño personalizado y cariño a familiares o amigos en Cuba.</p>",
+    price: 20,
+    paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+    images: ["agenda1.jpg", "agenda2.jpg", "agenda3.jpg"],
+    shippingAvailable: true
+},
+
+            5: {
+                title: "Impresión de fotos en papel fotográfico A4",
+                description: "Recuerda tus mejores momentos con impresiones de alta calidad.",
+                extendedDescription: "<p>Preserva tus recuerdos con impresiones fotográficas de alta calidad. Características:</p><ul><li>Tamaño A4 (21 x 29.7 cm)</li><li>Papel fotográfico premium de 180g</li><li>Impresión a color de alta resolución</li><li>Resistente a la decoloración (hasta 100 años)</li><li>Acabado brillo o mate (según preferencia)</li></ul><p>Perfecto para enmarcar, crear álbumes fotográficos, o decorar tus espacios con tus momentos especiales. Desde retratos familiares hasta paisajes impresionantes, cada impresión captura la esencia del momento.</p>",
+                price: 3,
+                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+                images: ["fotoimpresa1.jpg", "fotoimpresa2.jpg", "fotoimpresa3.jpg"],
+                shippingAvailable: true
+            },
+          6: {
+    title: "Camisetas y Pullovers Personalizados",
+    description: "Expresa tu estilo y envía un regalo único a tus seres queridos en Cuba con prendas sublimadas o con vinilo textil.",
+    extendedDescription: "<p><strong>Prendas Personalizadas – Estilo y Originalidad</strong><br>Expresa tu estilo y envía un regalo único a tus seres queridos en Cuba con nuestras prendas sublimadas o con vinilo textil.</p><ul><li>Tejido 100 % poliéster blanco, ideal para sublimación</li><li>Pullovers de tejido suave y cálido, también sublimables</li><li>Talles desde S hasta XXL</li><li>Estampado de alta calidad que no se decolora ni se agrieta</li><li>Diseños personalizados o plantillas disponibles (diseño gratis incluido)</li><li>Perfecto para regalos, eventos familiares, equipos de trabajo o para expresar tu personalidad única</li></ul><p>Crea un regalo práctico, duradero y personalizado que sorprenderá a familiares o amigos en Cuba con un toque de estilo y cariño.</p>",
+    price: 12,
+    paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+    images: ["camiseta1.jpg", "camiseta2.jpg", "camiseta3.jpg"],
+    shippingAvailable: true
+},
+
+            7: {
+                title: "Vinilos de corte para decoración",
+                description: "Decora tu hogar con frases motivadoras o diseños personalizados a tu gusto.",
+                extendedDescription: "<p>Transforma tus espacios con nuestros vinilos decorativos personalizados. Características:</p><ul><li>Vinilo de corte de alta calidad y durabilidad</li><li>Resistente al agua y a los rayos UV</li><li>Fácil aplicación y removible sin dañar superficies</li><li>Variedad de colores disponibles</li><li>Diseños personalizados según tus especificaciones</li></ul><p>Perfecto para decorar paredes, espejos, ventanas, laptops, o cualquier superficie lisa. Desde frases inspiradoras hasta diseños decorativos únicos, nuestros vinilos añaden personalidad a cualquier espacio.</p>",
+                price: 20,
+                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+                images: ["vinilo1.jpg", "vinilo2.jpg", "vinilo3.jpg"],
+                shippingAvailable: true
+            },
+
+            // ===== NUEVO PRODUCTO 8 - CUADROS PERSONALIZADOS =====
+            8: {
+                title: "Cuadros personalizados",
+                description: "Decora tus espacios con hermosos cuadros personalizados, impresiones en vinilo y papel fotográfico de alta calidad.",
+                extendedDescription: "<p><strong>Cuadros Personalizados – Elegancia y Personalización</strong><br>Transforma tus espacios con cuadros personalizados de alta calidad que capturan tus momentos más especiales. Ofrecemos diferentes formatos y materiales para adaptarnos a tus necesidades.</p><ul><li>Impresión en vinilo de alta resolución para interiores</li><li>Papel fotográfico premium resistente a la decoloración</li><li>Marcos de madera de diferentes estilos y colores</li><li>Protección UV para mayor durabilidad</li><li>Acabado profesional listo para colgar</li></ul><p>Ideal para decorar hogares, oficinas, o como regalo especial para familiares y amigos. Captura tus recuerdos más preciados y dales un lugar especial en tu espacio.</p>",
+                price: 15, // Precio base - se actualiza según medida seleccionada
+                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+                images: ["cuadro1.jpg", "cuadro2.jpg", "cuadro3.jpg"],
+                shippingAvailable: true,
+                measurements: [
+                    { size: "8x12 pulgadas", price: 15, dimensions: "20x30 cm" },
+                    { size: "12x18 pulgadas", price: 25, dimensions: "30x45 cm" },
+                    { size: "16x24 pulgadas", price: 35, dimensions: "40x60 cm" },
+                    { size: "20x30 pulgadas", price: 45, dimensions: "50x75 cm" }
+                ]
+            },
+
+            // ===== NUEVO PRODUCTO 9 - BANNER EN LONA =====
+            9: {
+                title: "Banner en lona",
+                description: "Impresión de banners en lona de alta calidad, perfectos para eventos, negocios y promociones.",
+                extendedDescription: "<p><strong>Banners en Lona – Impacto Visual Profesional</strong><br>Creamos banners publicitarios y decorativos en lona de alta calidad, ideales para eventos, negocios, ferias y promociones especiales.</p><ul><li>Lona publicitaria de alta resistencia</li><li>Impresión a todo color de alta resolución</li><li>Resistente a la intemperie y rayos UV</li><li>Ojales metálicos para fácil instalación</li><li>Acabado profesional con refuerzos en bordes</li><li>Ideal para uso interior y exterior</li></ul><p>Perfecto para promociones comerciales, eventos especiales, señalización o cualquier ocasión que requiera un impacto visual profesional y duradero.</p>",
+                price: 50, // Precio por m²
+                paypalLink: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TU_CODIGO_AQUI",
+                images: ["banner1.jpg", "banner2.jpg", "banner3.jpg"],
+                shippingAvailable: true,
+                pricePerSquareMeter: 50
+            }
+        };
     </script>
 </body>
 </html>
