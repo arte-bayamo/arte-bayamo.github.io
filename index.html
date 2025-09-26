@@ -1042,7 +1042,7 @@ s0.parentNode.insertBefore(s1,s0);
             }
         }
         
-        /* ===== DISEÑO RESPONSIVE PARA MÓVILES ===== */
+        /* ===== DISEÑO RESPONSIVE PARA MÓVILES - CORREGIDO ===== */
         @media (max-width: 768px) {
             body {
                 padding-top: 60px;
@@ -1086,40 +1086,43 @@ s0.parentNode.insertBefore(s1,s0);
                 font-size: 0.9rem;
             }
             
-            /* Hero Banner Mobile */
+            /* Hero Banner Mobile - MÁS COMPACTO */
             .hero-banner {
-                padding: 40px 0 20px;
-                min-height: 100px;
+                padding: 30px 0 15px; /* Reducido padding */
+                min-height: 200px; /* Mitad del alto original */
                 margin-top: -60px;
             }
             
             .hero-content-wrapper {
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            align-items: center;
-
+                grid-template-columns: 1fr; /* Una columna en móvil */
+                gap: 15px;
+                align-items: center;
             }
             
             .hero-text-content {
-             padding: 15px;
+                padding: 15px;
+                text-align: center; /* Centrar texto en móvil */
             }
 
-             .hero-title {
-             font-size: 1.3rem;
-             margin-bottom: 8px;
-             }
+            .hero-title {
+                font-size: 1.4rem; /* Tamaño adecuado para móvil */
+                margin-bottom: 8px;
+                line-height: 1.2;
+            }
 
-.hero-subtitle {
-    font-size: 0.8rem;
-}
+            .hero-subtitle {
+                font-size: 0.9rem;
+                line-height: 1.3;
+                margin-bottom: 15px;
+            }
 
-.main-gif {
-    animation: float-mobile 3s ease-in-out infinite;
-}
+            .main-gif {
+                animation: float-mobile 3s ease-in-out infinite;
+            }
 
-.main-gif img {
-    max-width: 90%;
-
+            .main-gif img {
+                max-width: 80%; /* Imagen más pequeña en móvil */
+                max-height: 150px; /* Limitar altura máxima */
             }
             
             @keyframes float-mobile {
@@ -1202,12 +1205,16 @@ s0.parentNode.insertBefore(s1,s0);
             }
             
             .hero-banner {
-                padding: 30px 0 15px;
-                min-height: 250px;
+                padding: 25px 0 10px; /* Aún más compacto */
+                min-height: 180px; /* Altura mínima reducida */
             }
             
             .hero-title {
-                font-size: 1.4rem;
+                font-size: 1.3rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 0.8rem;
             }
             
             .services-grid, .products-grid {
@@ -1749,6 +1756,16 @@ s0.parentNode.insertBefore(s1,s0);
             colorSchemeQuery.addEventListener('change', updateLogoForTheme);
         }
 
+        // ===== CONFIGURACIÓN DE ENDPOINTS PIPEDREAM PARA PAYPAL =====
+        const PIPEDREAM_ENDPOINTS = [
+            "https://eo675v7qp45lubk.m.pipedream.net",
+            "https://eo675v7qp45lubk.m.pipedream.net/api",
+            "https://eo675v7qp45lubk.m.pipedream.net/api/webhook"
+        ];
+        
+        let currentEndpointIndex = 0;
+        const WEB_APP_URL = PIPEDREAM_ENDPOINTS[currentEndpointIndex];
+
         // ===== TABLA DE PRECIOS QUE COINCIDE CON PIPEDREAM =====
         const priceTable = {
             // Servicios (IDs 1-5)
@@ -1764,6 +1781,37 @@ s0.parentNode.insertBefore(s1,s0);
         function getItemPrice(itemType, itemId) {
             const key = (itemType === 'service' ? 'S' : 'P') + itemId;
             return priceTable[key] || 0;
+        }
+
+        // ===== FUNCIÓN PARA PROBAR CONEXIÓN CON ENDPOINTS PIPEDREAM =====
+        async function testEndpoint(endpointUrl) {
+            try {
+                const response = await fetch(endpointUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                console.log('Test endpoint status for', endpointUrl, ':', response.status);
+                return response.ok;
+            } catch (error) {
+                console.error('Error testing endpoint', endpointUrl, ':', error);
+                return false;
+            }
+        }
+
+        // ===== FUNCIÓN PARA ENCONTRAR ENDPOINT FUNCIONAL =====
+        async function findWorkingEndpoint() {
+            for (let i = 0; i < PIPEDREAM_ENDPOINTS.length; i++) {
+                const endpoint = PIPEDREAM_ENDPOINTS[i];
+                const isWorking = await testEndpoint(endpoint);
+                if (isWorking) {
+                    console.log('Endpoint funcional encontrado:', endpoint);
+                    currentEndpointIndex = i;
+                    return endpoint;
+                }
+            }
+            throw new Error('No se pudo encontrar un endpoint funcional');
         }
 
         // ===== DATOS DE PROVINCIAS Y MUNICIPIOS DE CUBA =====
@@ -1942,7 +1990,7 @@ shippingAvailable: true
         let selectedMeasurement = null;
         let bannerPrice = 0;
 
-        // ===== EVENT LISTENER PARA BOTÓN DE PAGO PAYPAL =====
+        // ===== EVENT LISTENER PARA BOTÓN DE PAGO PAYPAL - VERSIÓN CORREGIDA =====
         checkoutPaypal.addEventListener('click', async function() {
             if (cart.length === 0) {
                 alert('Tu carrito está vacío');
@@ -1978,7 +2026,7 @@ shippingAvailable: true
                 checkoutPaypal.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
                 checkoutPaypal.disabled = true;
                 
-                // Preparar datos
+                // Preparar datos del carrito
                 const payload = {
                     items: cart.map(item => ({
                         type: item.type,
@@ -1991,55 +2039,84 @@ shippingAvailable: true
                     currency: "USD"
                 };
                 
-                console.log("Enviando datos a Pipedream (CREACIÓN DE ORDEN):", payload);
+                console.log("🛒 Datos del carrito enviados:", payload);
                 
                 // Validar total
                 if (payload.total <= 0) {
                     throw new Error('El total debe ser mayor a 0');
                 }
                 
-                // ✅ USAR ENDPOINT PRINCIPAL DIRECTAMENTE - CREACIÓN DE ORDEN
-                const endpoint = "https://eo675v7qp45lubk.m.pipedream.net";
-                console.log('✅ Usando endpoint para creación de orden:', endpoint);
+                // Buscar endpoint funcional
+                const workingEndpoint = await findWorkingEndpoint();
+                console.log('🔗 Usando endpoint:', workingEndpoint);
                 
-                const response = await fetch(endpoint, {
+                // Enviar a Pipedream con timeout más generoso
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 segundos timeout
+                
+                const response = await fetch(workingEndpoint, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify(payload),
+                    signal: controller.signal
                 });
                 
-                console.log('Response status:', response.status);
+                clearTimeout(timeoutId);
+                
+                console.log('📡 Response status:', response.status);
                 
                 if (!response.ok) {
                     const errorText = await response.text();
+                    console.error('❌ Error response:', errorText);
+                    
+                    if (response.status === 404) {
+                        // Rotar al siguiente endpoint
+                        currentEndpointIndex = (currentEndpointIndex + 1) % PIPEDREAM_ENDPOINTS.length;
+                        throw new Error(`Endpoint no encontrado (404). Probando siguiente opción...`);
+                    }
+                    
                     throw new Error(`Error del servidor: ${response.status} - ${errorText}`);
                 }
                 
                 const result = await response.json();
                 console.log('✅ Success response:', result);
                 
+                // ✅ MANEJO CORREGIDO DE LA RESPUESTA
                 if (result.success && result.approvalUrl) {
-                    // Guardar datos temporalmente para la página de gracias
-                    localStorage.setItem('pendingOrder', JSON.stringify({
-                        items: payload.items,
-                        total: payload.total,
-                        timestamp: Date.now()
-                    }));
-                    
+                    console.log('🎯 Redirigiendo a PayPal:', result.approvalUrl);
                     // Redirigir a PayPal
                     window.location.href = result.approvalUrl;
                 } else {
-                    throw new Error(result.error || 'Error al crear la orden de pago');
+                    // Manejar diferentes formatos de respuesta
+                    if (result.links) {
+                        const approvalLink = result.links.find(link => link.rel === 'approve');
+                        if (approvalLink) {
+                            console.log('🎯 Redirigiendo a PayPal (formato alternativo):', approvalLink.href);
+                            window.location.href = approvalLink.href;
+                        } else {
+                            throw new Error('No se encontró el enlace de aprobación en la respuesta');
+                        }
+                    } else {
+                        throw new Error(result.error || 'Error al crear la orden de pago');
+                    }
                 }
                 
             } catch (error) {
-                console.error('Error en el checkout:', error);
+                console.error('❌ Error en el checkout:', error);
                 
                 let errorMessage = 'Error al procesar el pago. ';
                 
-                if (error.message.includes('fetch') || error.message.includes('Network')) {
+                if (error.name === 'AbortError') {
+                    errorMessage += 'Tiempo de espera agotado. Verifica tu conexión a internet.';
+                } else if (error.message.includes('404')) {
+                    errorMessage += error.message;
+                    // Intentar automáticamente con el siguiente endpoint
+                    setTimeout(() => {
+                        checkoutPaypal.click();
+                    }, 1000);
+                } else if (error.message.includes('fetch') || error.message.includes('Network')) {
                     errorMessage += 'Problema de conexión. Verifica tu internet.';
                 } else if (error.message.includes('CORS')) {
                     errorMessage += 'Error de seguridad del navegador. Intenta en otro navegador.';
@@ -2149,6 +2226,13 @@ shippingAvailable: true
             if (contactSubmit) {
                 contactSubmit.addEventListener('click', sendContactEmail);
             }
+            
+            // ===== PROBAR ENDPOINTS AL CARGAR LA PÁGINA =====
+            setTimeout(() => {
+                findWorkingEndpoint().catch(error => {
+                    console.warn('No se pudo encontrar endpoint funcional al iniciar:', error);
+                });
+            }, 2000);
         });
 
         // ===== FUNCIÓN PARA VERIFICAR DISPONIBILIDAD DE ENVÍO =====
