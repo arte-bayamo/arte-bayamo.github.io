@@ -1996,8 +1996,9 @@ shippingAvailable: true
                 // Validar total
                 if (payload.total <= 0) {
                     throw new Error('El total debe ser mayor a 0');
-
-           // ESTA FUNCIÓN ASÍNCRONA DEBE SER LLAMADA CUANDO EL USUARIO HAGA CLIC EN EL BOTÓN DE PAGAR.
+                }
+                
+                // ESTA FUNCIÓN ASÍNCRONA DEBE SER LLAMADA CUANDO EL USUARIO HAGA CLIC EN EL BOTÓN DE PAGAR.
 // ASUME QUE LA VARIABLE 'payload' YA CONTIENE LOS DATOS DEL CARRITO LISTOS.
 
 async function checkout(payload) {
@@ -2071,6 +2072,8 @@ async function checkout(payload) {
         alert(error.message || 'Ocurrió un error inesperado al iniciar el pago. Por favor, intenta de nuevo.');
     }
 }
+            }
+        });
 
         // ===== INICIALIZACIÓN DE LA PÁGINA CUANDO SE CARGA =====
         document.addEventListener('DOMContentLoaded', function() {
