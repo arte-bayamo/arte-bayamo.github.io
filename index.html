@@ -1943,128 +1943,139 @@ shippingAvailable: true
         let bannerPrice = 0;
 
         // ===== EVENT LISTENER PARA BOTÓN DE PAGO PAYPAL =====
-        checkoutPaypal.addEventListener('click', async function() {
-            if (cart.length === 0) {
-                alert('Tu carrito está vacío');
+checkoutPaypal.addEventListener('click', async function() {
+    if (cart.length === 0) {
+        alert('Tu carrito está vacío');
+        return;
+    }
+    
+    // Validar ubicación para productos físicos
+    const hasPhysicalProducts = cart.some(item => item.type === 'product');
+    if (hasPhysicalProducts) {
+        const provinceSelect = document.getElementById('province');
+        const municipalitySelect = document.getElementById('municipality');
+        
+        if (provinceSelect && municipalitySelect) {
+            const province = provinceSelect.value;
+            const municipality = municipalitySelect.value;
+            
+            if (!province || !municipality) {
+                alert('Por favor, selecciona tu ubicación para productos físicos.');
                 return;
             }
             
-            // Validar ubicación para productos físicos
-            const hasPhysicalProducts = cart.some(item => item.type === 'product');
-            if (hasPhysicalProducts) {
-                const provinceSelect = document.getElementById('province');
-                const municipalitySelect = document.getElementById('municipality');
-                
-                if (provinceSelect && municipalitySelect) {
-                    const province = provinceSelect.value;
-                    const municipality = municipalitySelect.value;
-                    
-                    if (!province || !municipality) {
-                        alert('Por favor, selecciona tu ubicación para productos físicos.');
-                        return;
-                    }
-                    
-                    const isAvailable = checkShippingAvailability(province, municipality);
-                    if (!isAvailable) {
-                        const proceed = confirm('El envío no está disponible para tu ubicación. ¿Deseas continuar para consultar alternativas?');
-                        if (!proceed) return;
-                    }
-                }
+            const isAvailable = checkShippingAvailability(province, municipality);
+            if (!isAvailable) {
+                const proceed = confirm('El envío no está disponible para tu ubicación. ¿Deseas continuar para consultar alternativas?');
+                if (!proceed) return;
             }
-            
-            try {
-                // Mostrar carga
-                const originalText = checkoutPaypal.innerHTML;
-                checkoutPaypal.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
-                checkoutPaypal.disabled = true;
-                
-                // Preparar datos
-                const payload = {
-                    items: cart.map(item => ({
-                        type: item.type,
-                        id: item.id,
-                        title: item.title.substring(0, 100),
-                        price: getItemPrice(item.type, item.id),
-                        quantity: Math.min(Math.max(1, item.quantity), 10)
-                    })),
-                    total: cart.reduce((sum, item) => sum + (getItemPrice(item.type, item.id) * item.quantity), 0),
-                    currency: "USD"
-                };
-                
-                console.log("Enviando datos a Pipedream (CREACIÓN DE ORDEN):", payload);
-                
-                // Validar total
-                if (payload.total <= 0) {
-                    throw new Error('El total debe ser mayor a 0');
-                }
-                
-                // ✅ USAR ENDPOINT PRINCIPAL DIRECTAMENTE - CREACIÓN DE ORDEN
-                const endpoint = "https://eo675v7qp45lubk.m.pipedream.net";
-                console.log('✅ Usando endpoint para creación de orden:', endpoint);
-                
-                const response = await fetch(endpoint, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(payload)
-                });
-                
-               console.log('📡 Status de respuesta:', response.status);
-
-// Siempre intentar parsear como JSON primero
-let result;
-try {
-    result = await response.json();
-    console.log('📋 Respuesta parseada:', result);
-} catch (e) {
-    console.log('❌ Error parseando respuesta como JSON:', e);
-    throw new Error(`Error del servidor (${response.status}). Respuesta no válida.`);
-}
-
-if (!response.ok) {
-    // Mostrar el error específico de Pipedream
-    const errorMessage = result.error || `Error del servidor (${response.status})`;
-    console.log('❌ Error específico:', errorMessage);
-    throw new Error(errorMessage);
-}
-
-console.log('✅ Success response:', result);
-                
-                if (result.success && result.approvalUrl) {
-                    // Guardar datos temporalmente para la página de gracias
-                    localStorage.setItem('pendingOrder', JSON.stringify({
-                        items: payload.items,
-                        total: payload.total,
-                        timestamp: Date.now()
-                    }));
-                    
-                    // Redirigir a PayPal
-                    window.location.href = result.approvalUrl;
-                } else {
-                    throw new Error(result.error || 'Error al crear la orden de pago');
-                }
-                
-            } catch (error) {
-                console.error('Error en el checkout:', error);
-                
-                let errorMessage = 'Error al procesar el pago. ';
-                
-                if (error.message.includes('fetch') || error.message.includes('Network')) {
-                    errorMessage += 'Problema de conexión. Verifica tu internet.';
-                } else if (error.message.includes('CORS')) {
-                    errorMessage += 'Error de seguridad del navegador. Intenta en otro navegador.';
-                } else {
-                    errorMessage += error.message;
-                }
-                
-                alert(errorMessage);
-                
-                // Restaurar botón
-                checkoutPaypal.innerHTML = 'Pagar con PayPal';
-                checkoutPaypal.disabled = false;
-            }
+        }
+    }
+    
+    try {
+        // Mostrar carga
+        const originalText = checkoutPaypal.innerHTML;
+        checkoutPaypal.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
+        checkoutPaypal.disabled = true;
+        
+        // Preparar datos
+        const payload = {
+            items: cart.map(item => ({
+                type: item.type,
+                id: item.id,
+                title: item.title.substring(0, 100),
+                price: getItemPrice(item.type, item.id),
+                quantity: Math.min(Math.max(1, item.quantity), 10)
+            })),
+            total: cart.reduce((sum, item) => sum + (getItemPrice(item.type, item.id) * item.quantity), 0),
+            currency: "USD"
+        };
+        
+        console.log("🛒 Enviando datos a Pipedream:", payload);
+        
+        // Validar total
+        if (payload.total <= 0) {
+            throw new Error('El total debe ser mayor a 0');
+        }
+        
+        // ✅ USAR ENDPOINT PRINCIPAL DIRECTAMENTE - CREACIÓN DE ORDEN
+        const endpoint = "https://eo675v7qp45lubk.m.pipedream.net";
+        console.log('✅ Usando endpoint:', endpoint);
+        
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
         });
+        
+        console.log('📡 Status de respuesta HTTP:', response.status);
+        console.log('📡 Response OK?:', response.ok);
+
+        // 🔁 ORDEN CORREGIDO: 1. PRIMERO verificar response.ok
+        if (!response.ok) {
+            let errorText;
+            try {
+                errorText = await response.text();
+                console.log('❌ Error response text:', errorText);
+            } catch (e) {
+                errorText = `Error ${response.status} - No se pudo leer respuesta del servidor`;
+            }
+            throw new Error(`Error del servidor (${response.status}): ${errorText}`);
+        }
+
+        // 🔁 ORDEN CORREGIDO: 2. LUEGO parsear JSON (solo si response.ok es true)
+        let result;
+        try {
+            result = await response.json();
+            console.log('📋 Respuesta JSON parseada:', result);
+        } catch (e) {
+            console.log('❌ Error parseando JSON:', e);
+            const rawText = await response.text();
+            throw new Error(`La respuesta no es JSON válido. Contenido: ${rawText.substring(0, 200)}`);
+        }
+
+        // 🔁 ORDEN CORREGIDO: 3. FINALMENTE verificar lógica de negocio
+        if (result.success && result.approvalUrl) {
+            console.log('✅ Orden creada exitosamente:', result);
+            
+            // Guardar datos temporalmente para la página de gracias
+            localStorage.setItem('pendingOrder', JSON.stringify({
+                items: payload.items,
+                total: payload.total,
+                timestamp: Date.now(),
+                orderId: result.orderId
+            }));
+            
+            // Redirigir a PayPal
+            console.log('🔄 Redirigiendo a PayPal:', result.approvalUrl);
+            window.location.href = result.approvalUrl;
+            
+        } else {
+            throw new Error(result.error || result.message || 'Error al crear la orden de pago');
+        }
+        
+    } catch (error) {
+        console.error('💥 Error en el checkout:', error);
+        
+        let errorMessage = 'Error al procesar el pago. ';
+        
+        if (error.message.includes('fetch') || error.message.includes('Network')) {
+            errorMessage += 'Problema de conexión. Verifica tu internet.';
+        } else if (error.message.includes('CORS')) {
+            errorMessage += 'Error de seguridad del navegador. Intenta en otro navegador.';
+        } else {
+            errorMessage += error.message;
+        }
+        
+        alert(errorMessage);
+        
+        // Restaurar botón
+        checkoutPaypal.innerHTML = 'Pagar con PayPal';
+        checkoutPaypal.disabled = false;
+    }
+});
 
         // ===== INICIALIZACIÓN DE LA PÁGINA CUANDO SE CARGA =====
         document.addEventListener('DOMContentLoaded', function() {
