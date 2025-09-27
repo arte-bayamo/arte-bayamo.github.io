@@ -1998,80 +1998,71 @@ shippingAvailable: true
                     throw new Error('El total debe ser mayor a 0');
                 }
                 
-                // ESTA FUNCIÓN ASÍNCRONA DEBE SER LLAMADA CUANDO EL USUARIO HAGA CLIC EN EL BOTÓN DE PAGAR.
-// ASUME QUE LA VARIABLE 'payload' YA CONTIENE LOS DATOS DEL CARRITO LISTOS.
+                // ✅ USAR ENDPOINT PRINCIPAL DIRECTAMENTE - CREACIÓN DE ORDEN
+                const endpoint = "https://eo675v7qp45lubk.m.pipedream.net";
+                console.log('✅ Usando endpoint para creación de orden:', endpoint);
+                
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload)
+                });
+                
+               console.log('📡 Status de respuesta:', response.status);
 
-async function checkout(payload) {
-    const endpoint = "https://eo675v7qp45lubk.m.pipedream.net";
-    console.log('✅ Usando endpoint para creación de orden:', endpoint);
-
-    try {
-        const response = await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload)
-        });
-
-        // --- LECTURA Y PARSEO DE RESPUESTA ---
-        let result;
-        const responseText = await response.text();
-        console.log('📄 Raw response text:', responseText); 
-        
-        try {
-            // Intenta parsear la respuesta (que debería ser JSON limpio)
-            result = JSON.parse(responseText);
-            console.log('📋 Respuesta parseada:', result);
-        } catch (e) {
-            // Atrapa errores si el JSON está contaminado o incompleto
-            console.log('❌ Error al parsear respuesta como JSON:', e);
-            throw new Error(`Error de formato del servidor. Respuesta no es JSON válido.`);
-        }
-
-        // --- 1. VERIFICACIÓN DE ÉXITO HTTP (response.ok) ---
-        if (!response.ok) {
-            // Si el status es 4xx o 5xx, lanzamos el error del servidor
-            const errorMessage = result.error || result.message || `Error del servidor HTTP (${response.status})`;
-            console.log('❌ Error específico:', errorMessage);
-            throw new Error(errorMessage);
-        }
-
-        // --- 2. VERIFICACIÓN DE LÓGICA INTERNA (result.success y approvalUrl) ---
-        if (result && result.success === true && result.approvalUrl && result.approvalUrl.length > 0) {
-            
-            console.log('🎯 Todas las condiciones cumplidas, redirigiendo...');
-            console.log('🔗 URL de redirección:', result.approvalUrl);
-            
-            // Lógica de guardado de datos (tu código original)
-            try {
-                localStorage.setItem('pendingOrder', JSON.stringify({
-                    items: payload.items,
-                    total: payload.total,
-                    timestamp: Date.now()
-                }));
-                console.log('💾 Datos guardados en localStorage');
-            } catch (storageError) {
-                console.log('⚠️ Error guardando en localStorage (no crítico):', storageError);
-            }
-            
-            // 🚀 REDIRECCIÓN FINAL INMEDIATA
-            console.log('🚀 Redirigiendo a PayPal...');
-            window.location.href = result.approvalUrl;
-            
-        } else {
-            // Si el status HTTP fue 200, pero la propiedad 'success' es false
-            console.log('❌ Error lógico: La orden no fue creada a pesar del status 200.');
-            throw new Error(result.error || result.message || 'Error: La orden no fue creada. Respuesta de éxito inválida.');
-        }
-
-    } catch (error) {
-        // Bloque catch final que atrapa cualquier error (red, JSON, lógico)
-        console.error('💥 Error fatal en el proceso de checkout:', error);
-        // Mostrar un alert simple al usuario
-        alert(error.message || 'Ocurrió un error inesperado al iniciar el pago. Por favor, intenta de nuevo.');
-    }
+// Siempre intentar parsear como JSON primero
+let result;
+try {
+    result = await response.json();
+    console.log('📋 Respuesta parseada:', result);
+} catch (e) {
+    console.log('❌ Error parseando respuesta como JSON:', e);
+    throw new Error(`Error del servidor (${response.status}). Respuesta no válida.`);
 }
+
+if (!response.ok) {
+    // Mostrar el error específico de Pipedream
+    const errorMessage = result.error || `Error del servidor (${response.status})`;
+    console.log('❌ Error específico:', errorMessage);
+    throw new Error(errorMessage);
+}
+
+console.log('✅ Success response:', result);
+                
+                if (result.success && result.approvalUrl) {
+                    // Guardar datos temporalmente para la página de gracias
+                    localStorage.setItem('pendingOrder', JSON.stringify({
+                        items: payload.items,
+                        total: payload.total,
+                        timestamp: Date.now()
+                    }));
+                    
+                    // Redirigir a PayPal
+                    window.location.href = result.approvalUrl;
+                } else {
+                    throw new Error(result.error || 'Error al crear la orden de pago');
+                }
+                
+            } catch (error) {
+                console.error('Error en el checkout:', error);
+                
+                let errorMessage = 'Error al procesar el pago. ';
+                
+                if (error.message.includes('fetch') || error.message.includes('Network')) {
+                    errorMessage += 'Problema de conexión. Verifica tu internet.';
+                } else if (error.message.includes('CORS')) {
+                    errorMessage += 'Error de seguridad del navegador. Intenta en otro navegador.';
+                } else {
+                    errorMessage += error.message;
+                }
+                
+                alert(errorMessage);
+                
+                // Restaurar botón
+                checkoutPaypal.innerHTML = 'Pagar con PayPal';
+                checkoutPaypal.disabled = false;
             }
         });
 
