@@ -1998,7 +1998,7 @@ shippingAvailable: true
                     throw new Error('El total debe ser mayor a 0');
                 }
                 
-              // ✅ USAR ENDPOINT PRINCIPAL DIRECTAMENTE - CREACIÓN DE ORDEN
+            // ✅ USAR ENDPOINT PRINCIPAL DIRECTAMENTE - CREACIÓN DE ORDEN
 const endpoint = "https://eo675v7qp45lubk.m.pipedream.net";
 console.log('✅ Usando endpoint para creación de orden:', endpoint);
 
@@ -2010,73 +2010,57 @@ const response = await fetch(endpoint, {
     body: JSON.stringify(payload)
 });
 
-console.log('📡 Status de respuesta:', response.status);
-console.log('🔍 Response headers:', Object.fromEntries(response.headers.entries()));
-
-// Siempre intentar parsear como JSON primero
+// --- LECTURA Y PARSEO DE RESPUESTA ---
 let result;
 try {
     const responseText = await response.text();
-    console.log('📄 Raw response text:', responseText);
+    console.log('📄 Raw response text:', responseText); 
     
+    // Si la respuesta es 200, siempre debe ser JSON.
     result = JSON.parse(responseText);
     console.log('📋 Respuesta parseada:', result);
+    
 } catch (e) {
-    console.log('❌ Error parseando respuesta como JSON:', e);
-    throw new Error(`Error del servidor (${response.status}). Respuesta no válida.`);
+    // Esto atraparía errores de red o errores de parseo (si el JSON está corrupto)
+    console.log('❌ Error al leer o parsear la respuesta:', e);
+    throw new Error(`Error de conexión o de formato del servidor: ${response.status}`);
 }
 
-// DEBUG: Verificar propiedades específicas
-console.log('🔍 DEBUG - result:', result);
-console.log('🔍 DEBUG - result.success:', result.success, typeof result.success);
-console.log('🔍 DEBUG - result.approvalUrl:', result.approvalUrl);
-console.log('🔍 DEBUG - response.ok:', response.ok);
-console.log('🔍 DEBUG - Condición if éxito:', !!(result.success && result.approvalUrl));
+// --- VERIFICACIÓN Y REDIRECCIÓN ---
 
+// 1. Verificar si el status HTTP fue de éxito (200)
 if (!response.ok) {
-    // Mostrar el error específico de Pipedream
+    // Si el servidor devolvió un error (4xx o 5xx)
     const errorMessage = result.error || `Error del servidor (${response.status})`;
-    console.log('❌ Error específico:', errorMessage);
     throw new Error(errorMessage);
 }
 
-console.log('✅ Success response - procesando éxito...');
-
-// Verificar estructura exacta
-if (result && typeof result === 'object') {
-    console.log('📊 Propiedades del resultado:', Object.keys(result));
+// 2. Verificar la lógica interna del JSON (Este es el bloque de éxito)
+if (result && result.success === true && result.approvalUrl) {
     
-    if (result.success === true && result.approvalUrl && result.approvalUrl.length > 0) {
-        console.log('🎯 Todas las condiciones cumplidas, redirigiendo...');
-        console.log('🔗 URL de redirección:', result.approvalUrl);
-        
-        // Guardar datos temporalmente para la página de gracias
-        try {
-            localStorage.setItem('pendingOrder', JSON.stringify({
-                items: payload.items,
-                total: payload.total,
-                timestamp: Date.now()
-            }));
-            console.log('💾 Datos guardados en localStorage');
-        } catch (storageError) {
-            console.log('⚠️ Error guardando en localStorage (no crítico):', storageError);
-        }
-        
-        // Pequeña pausa para asegurar que los logs se vean
-        setTimeout(() => {
-            console.log('🚀 Redirigiendo a PayPal...');
-            window.location.href = result.approvalUrl;
-        }, 100);
-        
-    } else {
-        console.log('❌ Condiciones no cumplidas:');
-        console.log('   - result.success:', result.success, '(debe ser true)');
-        console.log('   - result.approvalUrl:', result.approvalUrl, '(debe existir)');
-        throw new Error(result.error || result.message || 'Error al crear la orden de pago - respuesta incompleta');
+    console.log('🎯 Todas las condiciones cumplidas, redirigiendo...');
+    console.log('🔗 URL de redirección:', result.approvalUrl);
+    
+    // Guardar datos temporalmente (tu lógica original es correcta aquí)
+    try {
+        localStorage.setItem('pendingOrder', JSON.stringify({
+            items: payload.items,
+            total: payload.total,
+            timestamp: Date.now()
+        }));
+        console.log('💾 Datos guardados en localStorage');
+    } catch (storageError) {
+        console.log('⚠️ Error guardando en localStorage (no crítico):', storageError);
     }
+    
+    // 🚀 ¡EL ARREGLO FINAL! Redirección inmediata sin setTimeout
+    console.log('🚀 Redirigiendo a PayPal...');
+    window.location.href = result.approvalUrl;
+    
 } else {
-    console.log('❌ Resultado no es un objeto válido:', typeof result);
-    throw new Error('Respuesta del servidor inválida');
+    // Si response.ok fue true (200) pero el JSON interno dice NO
+    console.log('❌ Error lógico: La orden no fue creada a pesar del status 200.');
+    throw new Error(result.error || result.message || 'Error: La orden no fue creada. Respuesta de éxito inválida.');
 }
 
         // ===== INICIALIZACIÓN DE LA PÁGINA CUANDO SE CARGA =====
