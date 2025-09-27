@@ -2010,15 +2010,26 @@ shippingAvailable: true
                     body: JSON.stringify(payload)
                 });
                 
-                console.log('Response status:', response.status);
-                
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(`Error del servidor: ${response.status} - ${errorText}`);
-                }
-                
-                const result = await response.json();
-                console.log('✅ Success response:', result);
+               console.log('📡 Status de respuesta:', response.status);
+
+// Siempre intentar parsear como JSON primero
+let result;
+try {
+    result = await response.json();
+    console.log('📋 Respuesta parseada:', result);
+} catch (e) {
+    console.log('❌ Error parseando respuesta como JSON:', e);
+    throw new Error(`Error del servidor (${response.status}). Respuesta no válida.`);
+}
+
+if (!response.ok) {
+    // Mostrar el error específico de Pipedream
+    const errorMessage = result.error || `Error del servidor (${response.status})`;
+    console.log('❌ Error específico:', errorMessage);
+    throw new Error(errorMessage);
+}
+
+console.log('✅ Success response:', result);
                 
                 if (result.success && result.approvalUrl) {
                     // Guardar datos temporalmente para la página de gracias
