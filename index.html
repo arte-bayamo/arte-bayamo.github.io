@@ -1998,29 +1998,40 @@ shippingAvailable: true
                     throw new Error('El total debe ser mayor a 0');
                 }
                 
-                // ✅ USAR ENDPOINT PRINCIPAL DIRECTAMENTE - CREACIÓN DE ORDEN
-                const endpoint = "https://eo675v7qp45lubk.m.pipedream.net";
-                console.log('✅ Usando endpoint para creación de orden:', endpoint);
-                
-                const response = await fetch(endpoint, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(payload)
-                });
-                
-               console.log('📡 Status de respuesta:', response.status);
+              // ✅ USAR ENDPOINT PRINCIPAL DIRECTAMENTE - CREACIÓN DE ORDEN
+const endpoint = "https://eo675v7qp45lubk.m.pipedream.net";
+console.log('✅ Usando endpoint para creación de orden:', endpoint);
+
+const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload)
+});
+
+console.log('📡 Status de respuesta:', response.status);
+console.log('🔍 Response headers:', Object.fromEntries(response.headers.entries()));
 
 // Siempre intentar parsear como JSON primero
 let result;
 try {
-    result = await response.json();
+    const responseText = await response.text();
+    console.log('📄 Raw response text:', responseText);
+    
+    result = JSON.parse(responseText);
     console.log('📋 Respuesta parseada:', result);
 } catch (e) {
     console.log('❌ Error parseando respuesta como JSON:', e);
     throw new Error(`Error del servidor (${response.status}). Respuesta no válida.`);
 }
+
+// DEBUG: Verificar propiedades específicas
+console.log('🔍 DEBUG - result:', result);
+console.log('🔍 DEBUG - result.success:', result.success, typeof result.success);
+console.log('🔍 DEBUG - result.approvalUrl:', result.approvalUrl);
+console.log('🔍 DEBUG - response.ok:', response.ok);
+console.log('🔍 DEBUG - Condición if éxito:', !!(result.success && result.approvalUrl));
 
 if (!response.ok) {
     // Mostrar el error específico de Pipedream
@@ -2029,42 +2040,44 @@ if (!response.ok) {
     throw new Error(errorMessage);
 }
 
-console.log('✅ Success response:', result);
-                
-                if (result.success && result.approvalUrl) {
-                    // Guardar datos temporalmente para la página de gracias
-                    localStorage.setItem('pendingOrder', JSON.stringify({
-                        items: payload.items,
-                        total: payload.total,
-                        timestamp: Date.now()
-                    }));
-                    
-                    // Redirigir a PayPal
-                    window.location.href = result.approvalUrl;
-                } else {
-                    throw new Error(result.error || 'Error al crear la orden de pago');
-                }
-                
-            } catch (error) {
-                console.error('Error en el checkout:', error);
-                
-                let errorMessage = 'Error al procesar el pago. ';
-                
-                if (error.message.includes('fetch') || error.message.includes('Network')) {
-                    errorMessage += 'Problema de conexión. Verifica tu internet.';
-                } else if (error.message.includes('CORS')) {
-                    errorMessage += 'Error de seguridad del navegador. Intenta en otro navegador.';
-                } else {
-                    errorMessage += error.message;
-                }
-                
-                alert(errorMessage);
-                
-                // Restaurar botón
-                checkoutPaypal.innerHTML = 'Pagar con PayPal';
-                checkoutPaypal.disabled = false;
-            }
-        });
+console.log('✅ Success response - procesando éxito...');
+
+// Verificar estructura exacta
+if (result && typeof result === 'object') {
+    console.log('📊 Propiedades del resultado:', Object.keys(result));
+    
+    if (result.success === true && result.approvalUrl && result.approvalUrl.length > 0) {
+        console.log('🎯 Todas las condiciones cumplidas, redirigiendo...');
+        console.log('🔗 URL de redirección:', result.approvalUrl);
+        
+        // Guardar datos temporalmente para la página de gracias
+        try {
+            localStorage.setItem('pendingOrder', JSON.stringify({
+                items: payload.items,
+                total: payload.total,
+                timestamp: Date.now()
+            }));
+            console.log('💾 Datos guardados en localStorage');
+        } catch (storageError) {
+            console.log('⚠️ Error guardando en localStorage (no crítico):', storageError);
+        }
+        
+        // Pequeña pausa para asegurar que los logs se vean
+        setTimeout(() => {
+            console.log('🚀 Redirigiendo a PayPal...');
+            window.location.href = result.approvalUrl;
+        }, 100);
+        
+    } else {
+        console.log('❌ Condiciones no cumplidas:');
+        console.log('   - result.success:', result.success, '(debe ser true)');
+        console.log('   - result.approvalUrl:', result.approvalUrl, '(debe existir)');
+        throw new Error(result.error || result.message || 'Error al crear la orden de pago - respuesta incompleta');
+    }
+} else {
+    console.log('❌ Resultado no es un objeto válido:', typeof result);
+    throw new Error('Respuesta del servidor inválida');
+}
 
         // ===== INICIALIZACIÓN DE LA PÁGINA CUANDO SE CARGA =====
         document.addEventListener('DOMContentLoaded', function() {
